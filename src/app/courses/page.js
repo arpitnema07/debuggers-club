@@ -25,10 +25,11 @@ const page = () => {
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                     Recusandae a, pariatur quo quos itaque maxime, inventore
                     perspiciatis totam fuga praesentium maiores laboriosam illo
-                    cumque quae, dolorum ratione ab illum harum.ipsum dolor sit amet consectetur, adipisicing elit.
-                    Recusandae a, pariatur quo quos itaque maxime, inventore
-                    perspiciatis totam fuga praesentium maiores laboriosam illo
-                    cumque quae, dolorum ratione ab illum harum.
+                    cumque quae, dolorum ratione ab illum harum.ipsum dolor sit
+                    amet consectetur, adipisicing elit. Recusandae a, pariatur
+                    quo quos itaque maxime, inventore perspiciatis totam fuga
+                    praesentium maiores laboriosam illo cumque quae, dolorum
+                    ratione ab illum harum.
                   </p>
                   <button className="text-green-500 p-2">Read More</button>
                 </div>
@@ -44,10 +45,11 @@ const page = () => {
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                     Recusandae a, pariatur quo quos itaque maxime, inventore
                     perspiciatis totam fuga praesentium maiores laboriosam illo
-                    cumque quae, dolorum ratione ab illum harum.ipsum dolor sit amet consectetur, adipisicing elit.
-                    Recusandae a, pariatur quo quos itaque maxime, inventore
-                    perspiciatis totam fuga praesentium maiores laboriosam illo
-                    cumque quae, dolorum ratione ab illum harum.
+                    cumque quae, dolorum ratione ab illum harum.ipsum dolor sit
+                    amet consectetur, adipisicing elit. Recusandae a, pariatur
+                    quo quos itaque maxime, inventore perspiciatis totam fuga
+                    praesentium maiores laboriosam illo cumque quae, dolorum
+                    ratione ab illum harum.
                   </p>
                   <button className="text-green-500 p-2">Read More</button>
                 </div>
