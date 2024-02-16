@@ -1,11 +1,11 @@
-const express = require("express");
-const next = require("next");
-const path = require("path");
+import express from "express";
+import next from "next";
+import { join } from "path";
 const port = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
-const backend = require("./backend/index");
+import backend from "./backend/index";
 app.prepare().then(() => {
   const mainServer = express();
 
@@ -22,20 +22,20 @@ app.prepare().then(() => {
       return handle(req, res);
     }
   });
-  mainServer.use(express.static(path.join(__dirname, "public")));
+  mainServer.use(mainServer.static(join(__dirname, "public")));
 
   // Define a route for the root URL
   mainServer.get("/algo/bst", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "bst.html"));
+    res.sendFile(join(__dirname, "public", "bst.html"));
   });
   mainServer.get("/algo/path", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "path.html"));
+    res.sendFile(join(__dirname, "public", "path.html"));
   });
   mainServer.get("/algo/sorting", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "sorting.html"));
+    res.sendFile(join(__dirname, "public", "sorting.html"));
   });
   mainServer.get("/algo/trie", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "trie.html"));
+    res.sendFile(join(__dirname, "public", "trie.html"));
   });
   mainServer.use("/api", backend);
   mainServer.use("/", handle);
