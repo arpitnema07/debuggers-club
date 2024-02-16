@@ -1,25 +1,10 @@
 import Head from "next/head";
+import Link from "next/link";
 import React from "react";
 
 const page = () => {
   return (
     <>
-      <Head>
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-          rel="stylesheet"
-        />
-        {/* Google Fonts */}
-        <link
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          rel="stylesheet"
-        />
-        {/* MDB */}
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
-          rel="stylesheet"
-        />
-      </Head>
       <section className="vh-100">
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -32,6 +17,7 @@ const page = () => {
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
               <form>
+                {/*
                 <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                   <p className="lead fw-normal mb-0 me-3">Sign in with</p>
                   <button
@@ -56,6 +42,7 @@ const page = () => {
                 <div className="divider d-flex align-items-center my-4">
                   <p className="text-center fw-bold mx-3 mb-0">Or</p>
                 </div>
+              */}
                 {/* Email input */}
                 <div className="form-outline mb-4">
                   <input
@@ -69,6 +56,7 @@ const page = () => {
                   </label>
                 </div>
                 {/* Password input */}
+                <hr></hr>
                 <div className="form-outline mb-3">
                   <input
                     type="password"
@@ -80,6 +68,8 @@ const page = () => {
                     Password
                   </label>
                 </div>
+                <hr></hr>
+
                 <div className="d-flex justify-content-between align-items-center">
                   {/* Checkbox */}
                   <div className="form-check mb-0">
@@ -107,37 +97,14 @@ const page = () => {
                   </button>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
-                    <a href="#!" className="link-danger">
+                    <Link href="/register" className="link-danger">
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </form>
             </div>
           </div>
-        </div>
-        <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-          {/* Copyright */}
-          <div className="text-white mb-3 mb-md-0">
-            Copyright © 2020. All rights reserved.
-          </div>
-          {/* Copyright */}
-          {/* Right */}
-          <div>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-facebook-f" />
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-twitter" />
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-google" />
-            </a>
-            <a href="#!" className="text-white">
-              <i className="fab fa-linkedin-in" />
-            </a>
-          </div>
-          {/* Right */}
         </div>
       </section>
     </>
