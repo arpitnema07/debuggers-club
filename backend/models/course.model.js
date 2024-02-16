@@ -38,10 +38,7 @@ const courseSchema = mongoose.Schema(
       },
     ],
 
-    // discussionId: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "Discussion",
-    // },
+    // disd
     // rating : {
     //     type :mongoose.Schema.Types.ObjectId,
     //     ref:"Rating"
@@ -56,5 +53,5 @@ const courseSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("Course", courseSchema);
-export default User;
+const Course = mongoose.model("Course", courseSchema);
+export default Course;
