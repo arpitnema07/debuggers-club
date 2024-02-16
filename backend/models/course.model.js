@@ -15,7 +15,7 @@ const courseSchema = mongoose.Schema(
     },
     difficulty: {
       type: String,
-      default: "Easy",
+      enum: ["Easy", "Moderate", "Advanced"],
     },
     image: {
       type: String,
@@ -36,7 +36,11 @@ const courseSchema = mongoose.Schema(
         ref: "User",
       },
     ],
-
+    tags: [
+      {
+        type: String,
+      },
+    ],
     // disd
     // rating : {
     //     type :mongoose.Schema.Types.ObjectId,
