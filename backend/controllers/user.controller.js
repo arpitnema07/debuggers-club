@@ -78,3 +78,13 @@ export const login = async (req, res) => {
 		});
 	}
 };
+
+export const getProfile = async (req, res) => {
+	try {
+		return res.status(200).json({
+			user: req.user,
+		});
+	} catch (error) {
+		console.log("Error while getting user profile : ", error);
+	}
+};
