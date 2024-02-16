@@ -2,19 +2,45 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+  .object()
+  .shape({
+    username: yup.string().required("username is required"),
+    name: yup.string().required("name  is required"),
+    email: yup
+      .string()
+      .email("Invalid email address")
+      .required("email is required"),
+    password: yup.string().required("password is required"),
+  })
+  .required();
 
 const page = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm();
+  const [invalidPassword, setInvalidPassword] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
-  const userRegister = async (data) => {
+  const userRegister = async (value) => {
     try {
-      const { data } = await axios.post(`/api/users/register`);
+      const { data } = await axios.post(`/api/users/register`, value);
       console.log("data", data);
       router.push("/login");
     } catch (error) {
+      if (
+        error?.response?.data?.message ===
+        "password and confirmPassword must match"
+      ) {
+        setInvalidPassword(error?.response?.data?.message);
+      }
       console.log("error", error);
     }
   };
@@ -85,7 +111,6 @@ const page = () => {
           <p className="text-center fw-bold mx-3 mb-0">Or</p>
         </div>*/}
                 {/*User name */}
-
                 <div className="form-outline mb-4">
                   <input
                     type="text"
@@ -98,9 +123,10 @@ const page = () => {
                     User name
                   </label>
                 </div>
-
                 <hr></hr>
-
+                {errors.name?.message && (
+                  <p className="text-red-500">{errors.name?.message}</p>
+                )}
                 {/*Name*/}
                 <div className="form-outline mb-4">
                   <input
@@ -114,13 +140,14 @@ const page = () => {
                     Name
                   </label>
                 </div>
-
-                <hr></hr>
-
+                <hr></hr>{" "}
+                {errors.name?.message && (
+                  <p className="text-red-500">{errors.name?.message}</p>
+                )}
                 {/* Email input */}
                 <div className="form-outline mb-4">
                   <input
-                    type="email"
+                    type="text"
                     id="form3Example3"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
@@ -131,7 +158,9 @@ const page = () => {
                   </label>
                 </div>
                 <hr></hr>
-
+                {errors.email?.message && (
+                  <p className="text-red-500">{errors.email?.message}</p>
+                )}
                 {/* Password input */}
                 <div className="form-outline mb-3">
                   <input
@@ -146,9 +175,10 @@ const page = () => {
                   </label>
                 </div>
                 <hr></hr>
-
+                {errors.password?.message && (
+                  <p className="text-red-500">{errors.password?.message}</p>
+                )}
                 {/* Confirm password*/}
-
                 <div className="form-outline mb-3">
                   <input
                     type="password"
@@ -161,9 +191,10 @@ const page = () => {
                     Confirm Password
                   </label>
                 </div>
-
                 <hr></hr>
-
+                {invalidPassword && (
+                  <p className="text-red-500">{invalidPassword}</p>
+                )}
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
                     type="submit"
