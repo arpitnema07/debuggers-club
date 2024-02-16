@@ -46,6 +46,11 @@ export const register = async (req, res) => {
       newUser,
     });
   } catch (error) {
+    if (error.message === "User already exists") {
+      return res.status(409).json({
+        message: error.message,
+      });
+    }
     console.log("Error while registering user : ", error);
     return res.status(500).json({
       message: "Something went wrong while registering user",
@@ -92,5 +97,42 @@ export const getProfile = async (req, res) => {
     });
   } catch (error) {
     console.log("Error while getting user profile : ", error);
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  try {
+    const allowedUpdates = ["name", "username"];
+    const updates = Object.keys(req.body);
+    const areUpdatesValid = updates.every((update) => {
+      if (!allowedUpdates.includes(update)) {
+        return false;
+      }
+    });
+
+    if (!areUpdatesValid) {
+      return res.status(400).json({
+        message: "Invalid updates",
+      });
+    }
+
+    updates.forEach((update) => {
+      req.user[update] = req.body[update];
+    });
+
+    if (req.file) {
+      console.log("req.file.buffer", req.file.buffer);
+    }
+
+    await req.user.save();
+
+    return res.status(200).json({
+      message: "Profile updated successfully",
+    });
+  } catch (error) {
+    console.log("Error while updating user profile : ", error);
+    return res.status(500).json({
+      message: "Something went wrong while updating profile",
+    });
   }
 };

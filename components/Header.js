@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Header = () => {
+  const router = useRouter();
   return (
     <>
       <div className="flex w-full m-5 justify-center items-center">
