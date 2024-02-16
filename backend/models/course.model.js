@@ -7,8 +7,7 @@ const courseSchema = mongoose.Schema(
       required: true,
     },
     shortDesc: {
-      type: String,
-      required: true,
+      type: String,      required: true,
     },
     desc: {
       type: String,

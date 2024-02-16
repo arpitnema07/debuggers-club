@@ -43,5 +43,13 @@ const userSchema = mongoose.Schema(
 	{ timestamps: true }
 );
 
+userSchema.post("save", function (err, doc, next) {
+	if (err.code === 11000) {
+		throw new Error("User already exists");
+	} else {
+		next();
+	}
+});
+
 const User = mongoose.model("User", userSchema);
 export default User;
