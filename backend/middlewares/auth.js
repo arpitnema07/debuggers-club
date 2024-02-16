@@ -14,7 +14,6 @@ export default async function auth(req, res, next) {
 		const decoded = jwt.verify(accessToken, process.env.JWT_SECRET);
 		const userId = decoded.userId;
 		const user = await findUserById(userId);
-		console.log("user", user);
 
 		if (!user) {
 			return res.status(401).json({
@@ -22,6 +21,7 @@ export default async function auth(req, res, next) {
 			});
 		}
 
+		req.user = user;
 		next();
 	} catch (error) {
 		console.log("Error while authenticating user : ", error);
