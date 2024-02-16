@@ -1,6 +1,6 @@
-const express = require("express");
-const backend = express.Router();
-const login = require("./routes/login");
+import { Router } from "express";
+const backend = Router();
+import login from "./routes/login.js";
 
 backend.get("/", (req, res) => {
   res.send("Hello From Backend");
@@ -8,4 +8,4 @@ backend.get("/", (req, res) => {
 
 backend.use("/login", login);
 
-module.exports = backend;
+export default backend;

@@ -1,5 +1,5 @@
-const express = require("express");
-const login = express.Router();
+import { Router } from "express";
+const login = Router();
 
 login.get("/", (req, res) => {
   res.send("Hello From login");
@@ -7,4 +7,4 @@ login.get("/", (req, res) => {
 
 login.use("/login", login);
 
-module.exports = login;
+export default login;
