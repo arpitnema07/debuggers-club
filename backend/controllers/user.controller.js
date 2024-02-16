@@ -22,10 +22,33 @@ const findUserByEmailOrUsername = async (username) => {
   return user;
 };
 
+const findUserByEmail = async (email) => {
+  const user = await userModel.findOne({
+    email: email,
+  });
+  return user;
+};
+
+const findUserByUsername = async (username) => {
+  const user = await userModel.findOne({ username: username });
+  return user;
+};
+
 export const register = async (req, res) => {
-  console.log("req.body", req.body);
   try {
     const { name, username, email, password, confirmPassword } = req.body;
+    const userEmail = await findUserByEmail(email);
+    if (userEmail) {
+      return res.status(409).json({
+        message: "Email already exist!",
+      });
+    }
+    const user = await findUserByUsername(username);
+    if (user) {
+      return res.status(409).json({
+        message: "Username already exist!",
+      });
+    }
     if (password !== confirmPassword) {
       return res.status(400).json({
         message: "password and confirmPassword must match",
@@ -46,6 +69,7 @@ export const register = async (req, res) => {
       newUser,
     });
   } catch (error) {
+    console.log(error);
     if (error.message === "User already exists") {
       return res.status(409).json({
         message: error.message,

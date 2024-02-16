@@ -23,6 +23,9 @@ const schema = yup
 const page = () => {
   const router = useRouter();
   const [invalidPassword, setInvalidPassword] = useState([]);
+  const [emailError, setEmailError] = useState([]);
+  const [userNameErr, setUserNameErr] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -40,6 +43,12 @@ const page = () => {
         "password and confirmPassword must match"
       ) {
         setInvalidPassword(error?.response?.data?.message);
+      }
+      if (error?.response?.data?.message === "Email already exist!") {
+        setEmailError(error?.response?.data?.message);
+      }
+      if (error?.response?.data?.message === "Username already exist!") {
+        setUserNameErr(error?.response?.data?.message);
       }
       console.log("error", error);
     }
@@ -124,6 +133,7 @@ const page = () => {
                   </label>
                 </div>
                 <hr></hr>
+                {userNameErr && <p className="text-red-500">{userNameErr}</p>}
                 {errors.name?.message && (
                   <p className="text-red-500">{errors.name?.message}</p>
                 )}
@@ -158,6 +168,7 @@ const page = () => {
                   </label>
                 </div>
                 <hr></hr>
+                {emailError && <p className="text-red-500">{emailError}</p>}
                 {errors.email?.message && (
                   <p className="text-red-500">{errors.email?.message}</p>
                 )}
