@@ -10,6 +10,11 @@ const generateToken = (userId) => {
 	return accessToken;
 };
 
+export const findUserById = async (userId) => {
+	const user = await userModel.findById(userId);
+	return user;
+};
+
 const findUserByEmailOrUsername = async (username) => {
 	const user = await userModel.findOne({
 		$or: [{ username }, { email: username }],
