@@ -4,8 +4,15 @@ import { join } from "path";
 const port = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
+
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const handle = app.getRequestHandler();
-import backend from "./backend/index";
+import backend from "./backend/index.js";
 app.prepare().then(() => {
   const mainServer = express();
 
@@ -22,7 +29,7 @@ app.prepare().then(() => {
       return handle(req, res);
     }
   });
-  mainServer.use(mainServer.static(join(__dirname, "public")));
+  mainServer.use(express.static(join(__dirname, "public")));
 
   // Define a route for the root URL
   mainServer.get("/algo/bst", (req, res) => {
