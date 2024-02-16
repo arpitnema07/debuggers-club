@@ -37,13 +37,14 @@ const findUserByUsername = async (username) => {
 export const register = async (req, res) => {
   try {
     const { name, username, email, password, confirmPassword } = req.body;
-    if (findUserByEmail(email)) {
+    const userEmail = await findUserByEmail(email);
+    if (userEmail) {
       return res.status(409).json({
         message: "Email already exist!",
       });
     }
-
-    if (findUserByUsername(username)) {
+    const user = await findUserByUsername(username);
+    if (user) {
       return res.status(409).json({
         message: "Username already exist!",
       });
@@ -68,6 +69,7 @@ export const register = async (req, res) => {
       newUser,
     });
   } catch (error) {
+    console.log(error);
     if (error.message === "User already exists") {
       return res.status(409).json({
         message: error.message,
