@@ -1,10 +1,75 @@
-import Head from "next/head";
+"use client";
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+  .object()
+  .shape({
+    username: yup.string().required("user or email is required"),
+    password: yup.string().required("password is required"),
+  })
+  .required();
 
 const page = () => {
+  const router = useRouter();
+  const [userError, setUserError] = useState([]);
+  const [invalidPassword, setInvalidPassword] = useState([]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const userLogin = async (value) => {
+    try {
+      const { data } = await axios.post(`/api/users/login`, value);
+      console.log("data", data);
+      router.push("/");
+    } catch (error) {
+      if (error?.response?.status === 404) {
+        setUserError(error?.response?.data?.message);
+      }
+      if (error?.response?.data?.message === "Invalid username or password") {
+        setInvalidPassword(error?.response?.data?.message);
+      }
+
+      console.log("error", error);
+    }
+  };
   return (
     <>
+      <head>
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        {/* Google Fonts */}
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+        />
+
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        {/* Google Fonts */}
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+        />
+        {/* MDB */}
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+          rel="stylesheet"
+        />
+      </head>
       <section className="vh-100">
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -16,7 +81,8 @@ const page = () => {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form>
+              {userError && <p className="text-red-500">{userError}</p>}
+              <form onSubmit={handleSubmit(userLogin)}>
                 {/*
                 <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                   <p className="lead fw-normal mb-0 me-3">Sign in with</p>
@@ -50,6 +116,7 @@ const page = () => {
                     id="form3Example3"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
+                    {...register("username")}
                   />
                   <label className="form-label" htmlFor="form3Example3">
                     Email address
@@ -57,18 +124,30 @@ const page = () => {
                 </div>
                 {/* Password input */}
                 <hr></hr>
+                {errors.username?.message && (
+                  <p className="text-red-500">{errors.username?.message}</p>
+                )}
+
                 <div className="form-outline mb-3">
                   <input
                     type="password"
                     id="form3Example4"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    {...register("password")}
                   />
                   <label className="form-label" htmlFor="form3Example4">
                     Password
                   </label>
                 </div>
                 <hr></hr>
+                {invalidPassword && (
+                  <p className="text-red-500">{invalidPassword}</p>
+                )}
+
+                {errors.password?.message && (
+                  <p className="text-red-500">{errors.password?.message}</p>
+                )}
 
                 <div className="d-flex justify-content-between align-items-center">
                   {/* Checkbox */}
@@ -89,7 +168,7 @@ const page = () => {
                 </div>
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-primary btn-lg"
                     style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
                   >

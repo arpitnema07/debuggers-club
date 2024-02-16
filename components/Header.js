@@ -41,10 +41,16 @@ const Header = () => {
               Contact Us
             </div>
             <div className="">
-              <Link href="/login"  className="mr-4 bg-green-500 text-white font-semibold rounded-md py-3 px-4">
+              <Link
+                href="/login"
+                className="mr-4 bg-green-500 text-white font-semibold rounded-md py-3 px-4"
+              >
                 Login
               </Link>
-              <Link href="/register" className="bg-blue-500 text-white font-semibold rounded-md py-3 px-4">
+              <Link
+                href="/register"
+                className="bg-blue-500 text-white font-semibold rounded-md py-3 px-4"
+              >
                 Register
               </Link>
             </div>
