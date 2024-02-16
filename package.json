@@ -11,6 +11,12 @@
     "app": "nodemon server.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.16",
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "d3": "^7.8.5",
     "dotenv": "^16.4.4",
@@ -21,7 +27,10 @@
     "next": "14.1.0",
     "path": "^0.12.7",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-icons": "^5.0.1",
+    "react-hook-form": "^7.50.1",
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
