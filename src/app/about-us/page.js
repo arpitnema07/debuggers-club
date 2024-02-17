@@ -1,14 +1,12 @@
 import React from 'react'
-
+import page from './page'
 const page = () => {
   
   let message = `Your time is limited, so don't waste it living someone else's life.\n Don't be trapped by dogma  which is living with the results of other people's thinking.`;
   return (
     <section className="Section-white">
     <div className="container">
-      <div>
-        <div  className="row gap-2">
-
+      <div className="row">
       <div className="col-md-12 Text-center">
         <h2 className="section-title">
           The Team Behind EduSycnSquad
@@ -91,7 +89,6 @@ const page = () => {
            </ul>
           </div>
         </div>
-      </div>
       </div>
 
 

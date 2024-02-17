@@ -1,6 +1,7 @@
 .section-white {
     background:#fff;
     padding: 70px 0;
+    margin: 10px;
 }
 .team-item {
     background: #f4f5f6;
@@ -118,3 +119,5 @@ ul.team-icon li a.github {
 ul.team-icon li a:hover {
     color: #e1bf4d;
 }
+
+
