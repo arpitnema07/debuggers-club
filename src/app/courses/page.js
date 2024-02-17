@@ -7,11 +7,12 @@ import cardImage from "../../../public/images/back.png";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import Footer from "../../../components/Footer";
 const page = () => {
   const accessToken = Cookies.get("accessToken");
   const router = useRouter();
   const [allCources, setAllCources] = useState([]);
+  console.log("allCources :>> ", allCources);
   useEffect(() => {
     if (accessToken) {
       getAllCources();
@@ -32,7 +33,7 @@ const page = () => {
   return (
     <div>
       <Header />
-      <div>
+      <div className="my-10">
         {/* cards  */}
         <div className="w-full my-10">
           <div className="p-4">
@@ -67,6 +68,7 @@ const page = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

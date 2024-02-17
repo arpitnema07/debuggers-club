@@ -6,7 +6,7 @@ import cardImage1 from "../../../public/images/Web-Dev.jpg";
 import cardImage2 from "../../../public/images/react.js-img.png";
 import cardImage3 from "../../../public/images/git-github.png";
 import cardImage4 from "../../../public/images/css.png";
-
+import Footer from '../../../components/Footer';
 import Header from '../../../components/Header';
 import Link from 'next/link';
 const page = () => {
@@ -78,6 +78,8 @@ const page = () => {
           </div>
         </div>
       </div>
+      <Footer/>
+
     </div>
   )
 }
