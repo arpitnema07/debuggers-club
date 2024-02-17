@@ -10,19 +10,7 @@ const page = () => {
   return (
     <>
       <Header />
-      {/* Code for chapters */}
-      {/* <div>
-        <div className="p-2">
-          <video
-            controls={true}
-            src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            className="w-1/2 "
-          ></video>
-          <h3 className="mb-3">Web Development Master Class </h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, ducimus consectetur adipisicing elit...
-          </p>
-        </div>
-      </div> */}
+     
       <div className="pt-4">
         <div className=" flex px-5 mb-6">
           <Image src={cardImage} alt="img" className="w-1/3 " />
