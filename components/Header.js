@@ -23,6 +23,11 @@ const Header = () => {
     setShow(!show);
   };
 
+  const logout = () => {
+    Cookies.remove("accessToken");
+    router.push("/login");
+  };
+
   return (
     <>
       <div className="flex  justify-center items-center bg-gray-100 p-4 shadow-md">
@@ -107,7 +112,10 @@ const Header = () => {
                         User Profile
                       </button>
                       <hr />
-                      <button className="flex items-center gap-2 bg-gray-300 w-28 px-4 py-2 text-sm">
+                      <button
+                        className="flex items-center gap-2 bg-gray-300 w-28 px-4 py-2 text-sm"
+                        onClick={logout}
+                      >
                         Logout <FaArrowRightFromBracket className="w-4 h-4" />
                       </button>
                     </div>

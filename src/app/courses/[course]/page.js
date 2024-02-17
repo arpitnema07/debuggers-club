@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Reviews from "../../../../components/Reviews";
 import axios from "axios";
 import Cookies from "js-cookie";
-import cardImage from "../../../../public/images/course2.jpg";
+// import cardImage from "../../../../public/images/course2.jpg";
 
 const page = (props) => {
   const accessToken = Cookies.get("accessToken");
@@ -53,7 +53,7 @@ const page = (props) => {
           </div>
         </div>
         <div className=" flex px-5 mb-6">
-          <Image src={cardImage} alt="img" className="w-1/3 " />
+          <img src={`/${singleCources?.image}`} alt="img" className="w-1/3 " />
           <div className="px-5 w-2/3">
             {" "}
             <h3 className="mb-3">Web Development Master Class </h3>
@@ -89,7 +89,9 @@ const page = (props) => {
             <div className="px-5">
               <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>Chapter - 1</Accordion.Header>
+                  <Accordion.Header>
+                    <b>Chapter</b> - {i + 1}
+                  </Accordion.Header>
                   <Accordion.Body className="flex gap-4">
                     <div
                       className="cursor-pointer w-5 h-5"
@@ -97,7 +99,7 @@ const page = (props) => {
                         router.push(`/courses/chapter/${data?._id}`);
                       }}
                     >
-                      <MdOutlineOndemandVideo />
+                      <MdOutlineOndemandVideo className="w-8 h-8" />
                     </div>
                     <div className="">
                       <p>
