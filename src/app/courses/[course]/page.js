@@ -14,6 +14,14 @@ const page = () => {
     <>
       <Header />
       <div className="pt-4">
+        <div className="flex gap-2 my-3">
+          <div className="ml-auto">
+            {/* <button className="text-white bg-blue-700  rounded-md py-2 px-4 ">Enroll Now</button> */}
+            <button className="text-white bg-blue-700 ml-auto rounded-md py-2 px-4 mr-4">
+              Call A Mentor
+            </button>
+          </div>
+        </div>
         <div className=" flex px-5 mb-6">
           <Image src={cardImage} alt="img" className="w-1/3 " />
           <div className="px-5 w-2/3">

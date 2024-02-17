@@ -56,16 +56,18 @@ const Header = () => {
                 Register
               </Link>
             </div>
-            {/* <div>Blogs</div> 
+            <div>Blogs</div>
             <div>Discussion</div>
-                <div>Code Editor</div>
-           <div>
-                 <p>pic</p> 
-                 <select className=''>
-                    <option>Profile</option>
-                    <option>Logout</option>
-                 </select>
-                </div> */}
+            <div>Code Editor</div>
+            <div>
+              <p>pic</p>
+              <select className="">
+                <option>
+                  <Link href={"/profile"}>Profile</Link>
+                </option>
+                <option>Logout</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
