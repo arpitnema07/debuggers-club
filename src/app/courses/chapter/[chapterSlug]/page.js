@@ -3,6 +3,8 @@
 import React from "react";
 import Header from "../../../../../components/Header";
 import CodeEditor from "../../../../../components/CodeEditor.jsx";
+import Algo from "../../../../../components/Algo";
+import Playground from "../../../../../components/Playground";
 
 const page = () => {
   return (
@@ -31,7 +33,7 @@ const page = () => {
             view pdf
           </a>
         </div>
-        <CodeEditor />
+        <Playground playgroundType={"trie"} />
       </div>
     </div>
   );

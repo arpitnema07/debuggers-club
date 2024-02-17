@@ -67,16 +67,6 @@
         flex-grow: 1;
       }
 
-      #headerLeft {
-        display: flex;
-        align-items: center;
-        padding-left: 40px;
-        justify-content: space-between;
-        width: 65%;
-      }
-      .headerLeftContent {
-        display: flex;
-      }
       .slidecontainer {
         position: relative;
         margin-right: 20px;
@@ -93,30 +83,12 @@
       .slider::-webkit-slider-thumb {
         cursor: pointer;
       }
-      .sliderValue {
-        position: absolute;
-        top: 20px;
-        left: 40px;
-      }
-      .speedValue {
-        position: absolute;
-        top: 20px;
-        left: 40px;
-      }
 
       a {
         text-decoration: none;
       }
 
-      #headerRight {
-        text-align: right;
-        padding-right: 55px;
-        width: 35%;
-      }
       #sort_type {
-        position: absolute;
-        right: 0 !important;
-        top: 1.5rem;
         margin-right: 2rem;
         padding: 0.5rem 1rem;
         border-radius: 5px;
@@ -128,13 +100,13 @@
 
       #container {
         display: flex;
-        width: 99%;
-        min-width: 99%;
-        height: 570px;
+        width: 95%;
+        min-width: 95%;
+        height: 350px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
-        margin-top: 25px;
+        margin-top: 10px;
       }
 
       .bar {
@@ -206,49 +178,10 @@
       }
     </style>
 
-    <title>Interactive Algorithm | Sorting</title>
+    <title>Debuggers | Sorting</title>
   </head>
 
   <body>
-    <div id="header">
-      <div id="headerLeft">
-        <div class="headerLeftContent">
-          <div class="slidecontainer">
-            <input
-              type="range"
-              min="25"
-              max="300"
-              value="150"
-              class="slider"
-              id="speedSlider"
-            />
-            <div class="speedValue">Speed</div>
-          </div>
-          <div class="slidecontainer">
-            <input
-              type="range"
-              min="10"
-              max="100"
-              value="50"
-              class="slider"
-              id="barSlider"
-            />
-            <div class="sliderValue">Bars: 50</div>
-          </div>
-          <button class="button" id="generateButton">Generate</button>
-        </div>
-        <a href="/index.html"><div id="title">Sorting Visualizer</div></a>
-      </div>
-      <div id="headerRight">
-        <select id="sort_type" name="sort_type">
-          <option value="insertion" selected>Insertion Sort</option>
-          <option value="bubble">Bubble Sort</option>
-          <option value="merge">Merge Sort</option>
-          <option value="selection">Selection Sort</option>
-          <option value="quick">Quick Sort</option>
-        </select>
-      </div>
-    </div>
     <div id="container"></div>
 
     <div id="buttonsdiv">
@@ -263,6 +196,31 @@
       <button type="button" id="sortButton" class="button">Sort</button>
       <button type="button" id="pauseButton" class="button">Pause</button>
       <button type="button" id="stopButton" class="button">Stop</button>
+      <button class="button" id="generateButton" class="button">
+        Generate
+      </button>
+      <div>
+        <select id="sort_type" name="sort_type">
+          <option value="insertion" selected>Insertion Sort</option>
+          <option value="bubble">Bubble Sort</option>
+          <option value="merge">Merge Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="quick">Quick Sort</option>
+        </select>
+      </div>
+      <div>
+        <div>
+          <input
+            type="range"
+            min="25"
+            max="300"
+            value="150"
+            class="slider"
+            id="speedSlider"
+          />
+          <div class="speedValue">Speed</div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -270,8 +228,7 @@
       let bars = [];
       let barValues = [];
 
-      let barSlider = document.getElementById("barSlider");
-      let n = barSlider.value;
+      let n = 25;
       let speedSlider = document.getElementById("speedSlider");
       let delay = 375 - speedSlider.value;
       var inputElement = document.getElementById("element");
@@ -317,11 +274,10 @@
         isSorted = false;
         isStopped = true;
         isPaused = false;
-        n = barSlider.value;
         lineWidth = width / n - 1;
         container.innerHTML = "";
         for (let i = 0; i < n; i++) {
-          heights[i] = parseInt(getRandomValue(1, height));
+          heights[i] = parseInt(getRandomValue(1, height - 25));
           bars.push(document.createElement("div"));
           bars[i].style.width = `${lineWidth}px`;
           bars[i].style.height = `${heights[i]}px`;
@@ -580,18 +536,6 @@
         SortedAnimation();
       }
 
-      // when slider value is changed generate new bars and update the value of bar count on the navbar.
-      barSlider.oninput = () => {
-        document.querySelector(
-          ".sliderValue"
-        ).innerHTML = `Bars: ${barSlider.value}`;
-        generateRandomArray();
-      };
-
-      speedSlider.oninput = () => {
-        delay = 375 - speedSlider.value;
-      };
-
       document
         .getElementById("generateButton")
         .addEventListener("click", generateRandomArray);
@@ -658,7 +602,6 @@
           isSorted = false;
           isStopped = true;
           isPaused = false;
-          n = barSlider.value;
           lineWidth = width / n - 1;
           container.innerHTML = "";
           var inputValue = inputElement.value.trim();

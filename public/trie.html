@@ -72,10 +72,8 @@
       }
       #OperationContainer {
         position: absolute;
-        top: 25px;
+        bottom: 25px;
         left: 20px;
-        display: flex;
-        align-items: center;
       }
       #OperationContainer button {
         background: #161824;
@@ -216,23 +214,6 @@
   </head>
   <body>
     <div class="container">
-      <div id="header">
-        <div id="OperationContainer">
-          <input
-            type="text"
-            id="InsertNodeField"
-            placeholder="Enter the word"
-          />
-          <button type="button" id="InsertButton" class="button">Insert</button>
-          <input
-            type="text"
-            id="DeleteNodeField"
-            placeholder="Enter the word"
-          />
-          <button type="button" id="DeleteButton" class="button">Delete</button>
-        </div>
-        <a href="/index.html"><div id="title">Trie</div></a>
-      </div>
       <div class="indicator_container">
         <div class="indicator">
           <div class="indicator_block" id="edge"></div>
@@ -248,6 +229,12 @@
         </div>
       </div>
       <div class="Canvas"></div>
+      <div id="OperationContainer">
+        <input type="text" id="InsertNodeField" placeholder="Enter the word" />
+        <button type="button" id="InsertButton" class="button">Insert</button>
+        <input type="text" id="DeleteNodeField" placeholder="Enter the word" />
+        <button type="button" id="DeleteButton" class="button">Delete</button>
+      </div>
     </div>
 
     <script
