@@ -1,11 +1,12 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
 const Header = () => {
   const router = useRouter();
   return (
     <>
-      <div className="flex w-full m-4 justify-center items-center">
+      <div className="flex m-4 justify-center items-center">
         <div
           className="w-1/2 cursor-pointer"
           onClick={() => {

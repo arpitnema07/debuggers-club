@@ -23,16 +23,36 @@ const userSchema = mongoose.Schema(
 			type: String,
 			default: null,
 		},
-		// enrolledCourses: [{
-		//   type: mongoose.Schema.Types.ObjectId,
-		//   ref: 'Course'
-		// }],
-		// favCourses: [
-		// 	{
-		// 		type: mongoose.Schema.Types.ObjectId,
-		// 		ref: "Course",
-		// 	},
-		// ],
+		roleName: {
+			type: String,
+			enum: ["user", "admin"],
+			default: "user",
+		},
+		phone: {
+			type: String,
+		},
+		state: {
+			type: String,
+		},
+		country: {
+			type: String,
+		},
+		qualification: {
+			type: String,
+			enum: ["10+2", "Diploma", "Graduation", "Post-Graduation"],
+		},
+		enrolledCourses: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Course",
+			},
+		],
+		favCourses: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Course",
+			},
+		],
 		// certificates: [
 		// 	{
 		// 		type: mongoose.Schema.Types.ObjectId,
