@@ -3,11 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../../components/Header";
 import Image from "next/image";
 import { FaAngleRight } from "react-icons/fa6";
-import cardImage from "../../../public/images/course2.jpg";
-import cardImage1 from "../../../public/images/Web-Dev.jpg";
-import cardImage2 from "../../../public/images/react.js-img.png";
-import cardImage3 from "../../../public/images/git-github.png";
-import cardImage4 from "../../../public/images/css.png";
+import cardImage from "../../../public/images/back.png";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -43,12 +39,13 @@ const page = () => {
             <div className="flex flex-col gap-5">
               {/* card 1 */}
               {allCources?.map((data, i) => {
+                console.log("data?.images", data);
                 return (
                   <div
                     className="border-gray-400 rounded-lg border-1 flex mx-10 "
                     key={i}
                   >
-                    <Image src={cardImage} alt="card" className="w-1/3" />
+                    <img src={`/${data?.image}`} alt="card" className="w-1/3" />
                     <div className="w-2/3 p-5">
                       <h2 className="text-2xl font-normal mb-2">
                         {data?.name}
