@@ -2,6 +2,7 @@ import express, { Router } from "express";
 import userRoutes from "./routes/user.route.js";
 import chapterRoutes from "./routes/chapter.route.js";
 import courseRoutes from "./routes/course.route.js";
+import executeRoutes from "./routes/execute.route.js";
 import connectDB from "./config/connectDB.js";
 const backend = Router();
 connectDB();
@@ -16,5 +17,6 @@ backend.get("/", (req, res) => {
 backend.use("/users", userRoutes);
 backend.use("/courses", courseRoutes);
 backend.use("/course/chapter", chapterRoutes);
+backend.use("/execute", executeRoutes);
 
 export default backend;
