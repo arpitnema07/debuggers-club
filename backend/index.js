@@ -1,16 +1,22 @@
 import express, { Router } from "express";
-const backend = Router();
 import userRoutes from "./routes/user.route.js";
+import chapterRoutes from "./routes/chapter.route.js";
+import courseRoutes from "./routes/course.route.js";
+import executeRoutes from "./routes/execute.route.js";
 import connectDB from "./config/connectDB.js";
+const backend = Router();
 connectDB();
 
 backend.use(express.urlencoded({ extended: true }));
 backend.use(express.json());
 
 backend.get("/", (req, res) => {
-	res.send("Hello From Backend");
+  res.send("Hello From Backend");
 });
 
 backend.use("/users", userRoutes);
+backend.use("/courses", courseRoutes);
+backend.use("/course/chapter", chapterRoutes);
+backend.use("/execute", executeRoutes);
 
 export default backend;
