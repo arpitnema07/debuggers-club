@@ -1,12 +1,25 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../../../../components/Header";
 import CodeEditor from "../../../../../components/CodeEditor.jsx";
 import Algo from "../../../../../components/Algo";
 import Playground from "../../../../../components/Playground";
+import { TiTickOutline } from "react-icons/ti";
 
-const page = () => {
+const page = (props) => {
+  console.log("props", props);
+  const id = props?.params?.chapterSlug;
+  useEffect(() => {
+    if (id) {
+      getSingleChapter();
+    }
+  }, [id]);
+  const getSingleChapter = async () => {
+    try {
+    } catch (error) {}
+  };
+  const complete = async () => {};
   return (
     <div>
       <Header />
@@ -35,6 +48,9 @@ const page = () => {
         </div>
         <Playground playgroundType={"trie"} />
       </div>
+      <span onClick={complete}>
+        Mark as complete <TiTickOutline />
+      </span>
     </div>
   );
 };
