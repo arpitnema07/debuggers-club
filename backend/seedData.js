@@ -45,13 +45,13 @@ const seedCourses = async () => {
 };
 
 const seedChapters = async () => {
-	const existingChapters = await chapterModel.find();
 	const chaptersToInsert = [];
 	for (const chapter of chapters) {
-		for (const existingChapter of existingChapters) {
-			if (existingChapter._id.toString() === chapter._id.toString()) {
-			}
+		const isCourseExists = await courseModel.findById(chapter.courseId);
+		if (!isCourseExists) {
+			throw new Error("Course does not exist");
 		}
+
 		chaptersToInsert.push(chapter);
 	}
 	await chapterModel.insertMany(chaptersToInsert);
