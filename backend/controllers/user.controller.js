@@ -2,6 +2,9 @@ import userModel from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import "dotenv/config";
 import jwt from "jsonwebtoken";
+import fs, { writeFileSync } from "fs";
+import path from "path";
+import { IMAGE_PATH } from "../utils/constants.js";
 
 const generateToken = (userId) => {
 	const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET, {
@@ -96,6 +99,9 @@ export const getProfile = async (req, res) => {
 		});
 	} catch (error) {
 		console.log("Error while getting user profile : ", error);
+		return res.status(500).json({
+			message: "Something went wrong while fetching profile",
+		});
 	}
 };
 
@@ -106,8 +112,11 @@ export const updateProfile = async (req, res) => {
 		const areUpdatesValid = updates.every((update) => {
 			if (!allowedUpdates.includes(update)) {
 				return false;
+			} else {
+				return true;
 			}
 		});
+		console.log("areUpdatesValid", areUpdatesValid);
 
 		if (!areUpdatesValid) {
 			return res.status(400).json({
@@ -120,15 +129,28 @@ export const updateProfile = async (req, res) => {
 		});
 
 		if (req.file) {
-			console.log("req.file.buffer", req.file.buffer);
+			const fileName =
+				req.file.fieldname +
+				"-" +
+				Date.now() +
+				path.extname(req.file.originalname);
+			fs.writeFileSync(`${IMAGE_PATH}/${fileName}`, req.file.buffer);
+
+			req.user.profileImage = `images/${fileName}`;
 		}
 
 		await req.user.save();
 
 		return res.status(200).json({
 			message: "Profile updated successfully",
+			updatedUser: req.user,
 		});
 	} catch (error) {
+		if (error.message === "User already exists") {
+			return res.status(409).json({
+				message: "username already exists",
+			});
+		}
 		console.log("Error while updating user profile : ", error);
 		return res.status(500).json({
 			message: "Something went wrong while updating profile",
