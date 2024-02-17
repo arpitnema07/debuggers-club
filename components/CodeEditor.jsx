@@ -53,7 +53,7 @@ export default function CodeEditor() {
     const code = editorRef.current.getValue();
     setOutput("");
     try {
-      const response = await axios.post(`api/execute/${selectedLanguage}`, {
+      const response = await axios.post(`/api/execute/${selectedLanguage}`, {
         code,
         input: input,
       });
@@ -80,7 +80,7 @@ export default function CodeEditor() {
   return (
     <div className="border-black border-[1px] w-1/2 m-2 bg-gray-200">
       <Content className="content ">
-        <div className="top-menu flex gap-4" >
+        <div className="top-menu flex gap-4">
           <Select
             defaultValue={selectedLanguage}
             style={{ width: 120 }}
