@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Header from "../../../../components/Header";
-import cardImage from "../../../../public/images/image2.png";
 import Image from "next/image";
 import Accordion from "react-bootstrap/Accordion";
 import { MdOutlineOndemandVideo } from "react-icons/md";
@@ -9,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Reviews from "../../../../components/Reviews";
 import axios from "axios";
 import Cookies from "js-cookie";
+import cardImage from "../../../../public/images/course2.jpg";
 
 const page = (props) => {
   const accessToken = Cookies.get("accessToken");
