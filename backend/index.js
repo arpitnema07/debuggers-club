@@ -4,6 +4,7 @@ import http from "http";
 import chapterRoutes from "./routes/chapter.route.js";
 import courseRoutes from "./routes/course.route.js";
 import executeRoutes from "./routes/execute.route.js";
+import progressRoutes from "./routes/progress.route.js";
 import connectDB from "./config/connectDB.js";
 connectDB();
 
@@ -35,7 +36,8 @@ backend.get("/", (req, res) => {
 
 backend.use("/users", userRoutes);
 backend.use("/courses", courseRoutes);
-backend.use("/course/chapter", chapterRoutes);
+backend.use("/chapters", chapterRoutes);
 backend.use("/execute", executeRoutes);
+backend.use("/progress", progressRoutes);
 
 export default backend;
