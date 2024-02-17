@@ -1,12 +1,37 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../../../../components/Header";
 import CodeEditor from "../../../../../components/CodeEditor.jsx";
 import Algo from "../../../../../components/Algo";
 import Playground from "../../../../../components/Playground";
+import { TiTickOutline } from "react-icons/ti";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-const page = () => {
+const page = (props) => {
+  const accessToken = Cookies.get("accessToken");
+  const id = props?.params?.chapterSlug;
+  const [singleChapter, setSingleChapter] = useState();
+  useEffect(() => {
+    if (id) {
+      getSingleChapter();
+    }
+  }, [id]);
+  const getSingleChapter = async () => {
+    try {
+      const { data } = await axios.get(`/api/chapters/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log("data", data);
+      setSingleChapter(data?.chapter);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  const complete = async () => {};
   return (
     <div>
       <Header />
@@ -18,23 +43,23 @@ const page = () => {
             src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             className=""
           ></video>
-          <h3 className="my-2 text-xl">Web Development Master Class </h3>
-          <p className="text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-            ducimus consectetur adipisicing elit ipsum dolor sit amet
-            consectetur adipisicing elit. Rem, ducimus consectetur adipisicing
-            elit.
-          </p>
-          <a
-            href=""
-            className="text-sm my-2  text-blue-600 hover:border-b-[1px] border-b-blue-500 "
-            target="_blank"
-          >
-            view pdf
-          </a>
+          <h3 className="my-2 text-xl">{singleChapter?.name} </h3>
+          <p className="text-sm">{singleChapter?.desc}</p>
+          {singleChapter?.document && (
+            <a
+              href=""
+              className="text-sm my-2  text-blue-600 hover:border-b-[1px] border-b-blue-500 "
+              target="_blank"
+            >
+              view pdf
+            </a>
+          )}
         </div>
-        <Playground playgroundType={"trie"} />
+        <Playground playgroundType={singleChapter?.playgroundType} />
       </div>
+      <span onClick={complete}>
+        Mark as complete <TiTickOutline />
+      </span>
     </div>
   );
 };
