@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import Header from "../../../../components/Header";
-import cardImage from "../../../../public/images/image2.png";
 import Image from "next/image";
 import Accordion from "react-bootstrap/Accordion";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import Reviews from "../../../../components/Reviews";
+import cardImage from "../../../../public/images/course2.jpg";
 
 const page = () => {
   const router = useRouter();
