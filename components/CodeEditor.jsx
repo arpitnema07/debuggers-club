@@ -78,7 +78,7 @@ export default function CodeEditor() {
     setSelectedLanguage(value);
   };
   return (
-    <div>
+    <div className="border-black border-[1px] w-1/2 m-2 bg-gray-200">
       <Content className="content">
         <div className="top-menu" style={{ display: "flex" }}>
           <Select
@@ -100,20 +100,21 @@ export default function CodeEditor() {
             Run Code
           </Button>
         </div>
-        <Row gutter={[16, 16]}>
+        <Col>
+          <div className="editor-container">
+            <Editor
+              height="50vh"
+              language={selectedLanguage}
+              value={editorValue}
+              onMount={(editor) => {
+                editorRef.current = editor;
+              }}
+            />
+          </div>
+        </Col>
+
+        <Row span={24}>
           <Col span={12}>
-            <div className="editor-container">
-              <Editor
-                height="70vh"
-                language={selectedLanguage}
-                value={editorValue}
-                onMount={(editor) => {
-                  editorRef.current = editor;
-                }}
-              />
-            </div>
-          </Col>
-          <Col span={12} className="col-container">
             <Card className="input-card">
               <h2>Input</h2>
               <textarea
@@ -122,6 +123,8 @@ export default function CodeEditor() {
                 onChange={(e) => setInput(e.target.value)}
               />
             </Card>
+          </Col>
+          <Col span={12}>
             <Card className="output-card">
               <h2>Output</h2>
               <pre>{output}</pre>
