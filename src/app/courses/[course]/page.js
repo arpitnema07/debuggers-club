@@ -34,7 +34,7 @@ const page = (props) => {
         }
       );
       console.log("data", data);
-      setSingleCources(data?.courses[0]);
+      setSingleCources(data?.course[0]);
     } catch (error) {
       console.log("error", error);
     }
