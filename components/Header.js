@@ -98,13 +98,17 @@ const Header = () => {
                   />
                   {show && (
                     <div className="absolute z-10 right-16 mt-2 w-28 top-16 bg-white rounded-md overflow-hidden">
-                      <button className="flex bg-gray-300 w-28 px-4 py-2 text-sm ">
+                      <button
+                        className="flex bg-gray-300 w-28 px-4 py-2 text-sm "
+                        onClick={() => {
+                          router.push("/profile");
+                        }}
+                      >
                         User Profile
                       </button>
                       <hr />
                       <button className="flex items-center gap-2 bg-gray-300 w-28 px-4 py-2 text-sm">
-                        Logout <FaArrowRightFromBracket className="w-4 h-4"/>
-
+                        Logout <FaArrowRightFromBracket className="w-4 h-4" />
                       </button>
                     </div>
                   )}
