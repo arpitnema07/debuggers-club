@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeroImage from "../public/images/image1.jpeg";
 import Image from "next/image";
 import { FaAngleRight } from "react-icons/fa6";
@@ -10,7 +10,29 @@ import cardImage4 from "../public/images/css.png";
 import cardImage5 from "../public/images/course1.png";
 
 import Link from "next/link";
+import axios from "axios";
+import Cookies from "js-cookie";
 const Hero = () => {
+  const accessToken = Cookies.get("accessToken");
+  const [allCources, setAllCources] = useState([]);
+
+  useEffect(() => {
+    if (accessToken) {
+      getAllCources();
+    }
+  }, []);
+
+  const getAllCources = async () => {
+    try {
+      const { data } = await axios.get("/api/courses", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log("data", data);
+      setAllCources(data?.courses);
+    } catch (error) {}
+  };
   return (
     <>
       <div>
@@ -42,74 +64,25 @@ const Hero = () => {
             </h2>
             <div className="grid grid-cols-2 justify-between gap-32 mx-28">
               {/* card 1 */}
-              <div className=" border-2 ">
-                <Image src={cardImage5} alt="card" className="w-full" />
-                <h2 className="text-xl font-normal p-2">
-                  This is card Heading
-                </h2>
-                <p className="p-2">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Recusandae a, pariatur quo quos itaque maxime, inventore
-                  perspiciatis totam fuga
-                </p>
-                <Link href="/blogs/1" className="text-green-500 p-2">
-                  Read More
-                </Link>
-              </div>
-              {/* card 2 */}
-              <div className=" border-2 ">
-                <Image src={cardImage1} alt="card" className="w-full" />
-                <h2 className="text-xl font-normal p-2">
-                  This is card Heading
-                </h2>
-                <p className="p-2">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Recusandae a, pariatur quo quos itaque maxime, inventore
-                  perspiciatis totam fuga
-                </p>
-                <button className="text-green-500 p-2">Read More</button>
-              </div>
-              {/* card 3 */}
-              <div className=" border-2 ">
-                <Image src={cardImage2} alt="card" className="w-full" />
-                <h2 className="text-xl font-normal p-2">
-                  This is card Heading
-                </h2>
-                <p className="p-2">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Recusandae a, pariatur quo quos itaque maxime, inventore
-                  perspiciatis totam fuga
-                </p>
-                <button className="text-green-500 p-2">Read More</button>
-              </div>
-              {/* card 4 */}
-              <div className=" border-2 ">
-                <Image src={cardImage3} alt="card" className="w-full" />
-                <h2 className="text-xl font-normal p-2">
-                  This is card Heading
-                </h2>
-                <p className="p-2">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Recusandae a, pariatur quo quos itaque maxime, inventore
-                  perspiciatis totam fuga
-                </p>
-
-                <button className="text-green-500 p-2">Read More</button>
-              </div>
-              {/* card 5 */}
-              <div className=" border-2 ">
-                <Image src={cardImage4} alt="card" className="w-full" />
-                <h2 className="text-xl font-normal p-2">
-                  This is card Heading
-                </h2>
-                <p className="p-2">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Recusandae a, pariatur quo quos itaque maxime, inventore
-                  perspiciatis totam fuga
-                </p>
-
-                <button className="text-green-500 p-2">Read More</button>
-              </div>
+              {allCources?.map((data, i) => {
+                return (
+                  <div className=" border-2 ">
+                    <img
+                      src={`/${data?.image}`}
+                      alt="card"
+                      className="w-full"
+                    />
+                    <h2 className="text-xl font-normal p-2">{data?.name}</h2>
+                    <p className="p-2">{data?.shortDesc}</p>
+                    <Link
+                      href={`/courses/${data?._id}`}
+                      className="text-green-500 p-2"
+                    >
+                      Read More
+                    </Link>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

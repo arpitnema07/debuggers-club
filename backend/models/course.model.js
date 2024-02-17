@@ -22,15 +22,14 @@ const courseSchema = mongoose.Schema(
 			type: String,
 			default: null,
 		},
+		price: {
+			type: Number,
+			default: 0,
+		},
 		// intro_clip: {
 		//   type: String,
 		//   default: null,
 		// },
-
-		// chapters: [{
-		//   type: mongoose.Schema.Types.ObjectId,
-		//   ref: 'Chapter'
-		// }],
 		enrolledUsers: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
