@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import Image from "next/image";
-import user from "../public/images/blank-profile-picture.webp";
+import temp from "../public/images/blank-profile-picture.webp";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
+import { useUserContext } from "@/app/context/page";
 
 const Header = () => {
   const router = useRouter();
+  const { user } = useUserContext();
   const [isToken, setIsToken] = useState();
   useEffect(() => {
     const token = Cookies.get("accessToken");
@@ -98,14 +99,14 @@ const Header = () => {
             ) : (
               <div className="flex gap-2">
                 <div className="border-gray-400 border-[1px] flex items-center rounded-md  ">
-                  <input placeholder="search..." className="m-2"/>
-                  <IoSearchOutline className="bg-gray-300 m-0"/>
+                  <input placeholder="search..." className="m-2" />
+                  <IoSearchOutline className="bg-gray-300 m-0" />
                 </div>
                 <div>
-                  <Image
+                  <image
                     alt="aa"
                     unoptimized
-                    src={user}
+                    src={isToken ? user?.profileImage : temp}
                     className="w-12 h-12 rounded-full cursor-pointer "
                     onClick={handleShow}
                   />
