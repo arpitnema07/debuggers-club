@@ -12,7 +12,7 @@ const page = () => {
        <div className="w-full my-10">
         <div className="p-4">
         
-          <div className="grid grid-cols-4 justify-evenly gap-4">
+          <div className="grid grid-cols-2 justify-between gap-32 mx-28">
             {/* card 1 */}
             <div className=" border-2 ">
               <Image src={cardImage} alt="card" className="w-full" />

@@ -3,7 +3,7 @@ import HeroImage from "../public/images/image1.jpeg";
 import Image from "next/image";
 import { FaAngleRight } from "react-icons/fa6";
 import cardImage from "../public/images/image2.png";
-
+import Link from "next/link";
 const Hero = () => {
   return (
     <>
@@ -45,51 +45,60 @@ const Hero = () => {
           <h2 className="text-center text-2xl font-semibold mb-6">
             Our Courses
           </h2>
-          <div className="flex justify-evenly ">
+          <div className="grid grid-cols-2 justify-between gap-32 mx-28">
             {/* card 1 */}
-            <div className="w-1/5 border-2 ">
+            <div className=" border-2 ">
               <Image src={cardImage} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga praesentium maiores laboriosam illo
-                cumque quae, dolorum ratione ab illum harum.
+                perspiciatis totam fuga
               </p>
-              <button className="text-green-500 p-2">Read More</button>
+              <Link href="/blogs/1" className="text-green-500 p-2">Read More</Link>
             </div>
             {/* card 2 */}
-            <div className="w-1/5 border-2 ">
+            <div className=" border-2 ">
               <Image src={cardImage} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga praesentium maiores laboriosam illo
-                cumque quae, dolorum ratione ab illum harum.
+                perspiciatis totam fuga 
               </p>
               <button className="text-green-500 p-2">Read More</button>
             </div>
             {/* card 3 */}
-            <div className="w-1/5 border-2 ">
+            <div className=" border-2 ">
               <Image src={cardImage} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga praesentium maiores laboriosam illo
-                cumque quae, dolorum ratione ab illum harum.
+                perspiciatis totam fuga
               </p>
               <button className="text-green-500 p-2">Read More</button>
             </div>
-            <div className="w-1/5 border-2 ">
+            {/* card 4 */}
+            <div className=" border-2 ">
               <Image src={cardImage} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga praesentium maiores laboriosam illo
-                cumque quae, dolorum ratione ab illum harum.
+                perspiciatis totam fuga 
+              </p>
+
+              <button className="text-green-500 p-2">Read More</button>
+            </div>
+             {/* card 5 */}
+             <div className=" border-2 ">
+              <Image src={cardImage} alt="card" className="w-full" />
+              <h2 className="text-xl font-normal p-2">This is card Heading</h2>
+              <p className="p-2">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Recusandae a, pariatur quo quos itaque maxime, inventore
+                perspiciatis totam fuga 
               </p>
 
               <button className="text-green-500 p-2">Read More</button>
