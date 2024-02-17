@@ -53,7 +53,7 @@ export default function CodeEditor() {
     const code = editorRef.current.getValue();
     setOutput("");
     try {
-      const response = await axios.post(`api/execute/${selectedLanguage}`, {
+      const response = await axios.post(`/api/execute/${selectedLanguage}`, {
         code,
         input: input,
       });
@@ -79,8 +79,8 @@ export default function CodeEditor() {
   };
   return (
     <div className="border-black border-[1px] w-1/2 m-2 bg-gray-200">
-      <Content className="content">
-        <div className="top-menu" style={{ display: "flex" }}>
+      <Content className="content ">
+        <div className="top-menu flex gap-4">
           <Select
             defaultValue={selectedLanguage}
             style={{ width: 120 }}
@@ -112,20 +112,21 @@ export default function CodeEditor() {
             />
           </div>
         </Col>
-
-        <Row span={24}>
-          <Col span={12}>
-            <Card className="input-card">
+        <hr className="bg-black h-[1px]" />
+        <Row span={24} className="h-[150px] ">
+          <Col span={12} className="h-full">
+            <Card className="input-card h-full">
               <h2>Input</h2>
               <textarea
                 id="program-input"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
+                className="w-full h-[100px] outline-none text-gray-400"
               />
             </Card>
           </Col>
-          <Col span={12}>
-            <Card className="output-card">
+          <Col span={12} className="h-full">
+            <Card className="output-card h-full">
               <h2>Output</h2>
               <pre>{output}</pre>
             </Card>
