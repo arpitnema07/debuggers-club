@@ -1,5 +1,4 @@
 import chapterModel from "../models/chapter.model.js";
-import mongoose from "mongoose";
 
 import "dotenv/config";
 

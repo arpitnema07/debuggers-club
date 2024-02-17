@@ -2,12 +2,12 @@
 
 // import React from "react";
 // import Header from "../../../components/Header";
-// import CodeEditor from "../../../components/CodeEditor";
+// import CodeEditor from "../../../components/CodeEditor.jsx";
 
 // const page = () => {
 //   return (
 //     <div>
-//       {/* <Header /> */}
+//       <Header />
 //       {/* Code for chapters */}
 //       <div className="flex">
 //         <div className="p-2 w-1/2">
@@ -31,7 +31,7 @@
 //             view pdf
 //           </a>
 //         </div>
-//         <CodeEditor/>
+//         <CodeEditor />
 //       </div>
 //     </div>
 //   );
