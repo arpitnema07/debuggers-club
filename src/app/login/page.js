@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Cookies from "js-cookie";
 
 const schema = yup
   .object()
@@ -29,11 +30,12 @@ const page = () => {
   const userLogin = async (value) => {
     try {
       const { data } = await axios.post(`/api/users/login`, value);
-      console.log("data", data);
+      Cookies.set("accessToken", data?.accessToken);
       router.push("/");
     } catch (error) {
       if (error?.response?.status === 404) {
         setUserError(error?.response?.data?.message);
+        router.push("/register");
       }
       if (error?.response?.data?.message === "Invalid username or password") {
         setInvalidPassword(error?.response?.data?.message);
@@ -112,14 +114,14 @@ const page = () => {
                 {/* Email input */}
                 <div className="form-outline mb-4">
                   <input
-                    type="email"
+                    type="text"
                     id="form3Example3"
                     className="form-control form-control-lg"
-                    placeholder="Enter a valid email address"
+                    placeholder="Enter a valid email or username"
                     {...register("username")}
                   />
                   <label className="form-label" htmlFor="form3Example3">
-                    Email address
+                    Email/Username
                   </label>
                 </div>
                 {/* Password input */}
