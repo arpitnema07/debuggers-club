@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/", getCourses);
-router.get("/:id", getCourseById);
+router.get("/:id", auth, getCourseById);
 router.post("/:courseId/enroll", auth, enrollCourse);
 router.patch("/:courseId", auth, updateCourse);
 

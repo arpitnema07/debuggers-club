@@ -64,6 +64,39 @@ export const getCourseById = async (req, res) => {
 					as: "chapters",
 				},
 			},
+			{
+				$lookup: {
+					from: "reviews",
+					localField: "_id",
+					foreignField: "courseId",
+					pipeline: [
+						{
+							$lookup: {
+								from: "users",
+								localField: "userId",
+								foreignField: "_id",
+								pipeline: [
+									{
+										$project: {
+											name: true,
+											username: true,
+											profileImage: true,
+										},
+									},
+								],
+								as: "user",
+							},
+						},
+						{
+							$unwind: {
+								path: "$user",
+								preserveNullAndEmptyArrays: true,
+							},
+						},
+					],
+					as: "reviews",
+				},
+			},
 		]);
 
 		return res.status(200).json({

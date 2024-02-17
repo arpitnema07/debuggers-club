@@ -77,3 +77,54 @@ export const markChapterAsComplete = async (req, res) => {
 		});
 	}
 };
+
+export const updateChapter = async (req, res) => {
+	try {
+		const { chapterId } = req.params;
+		const chapter = await chapterModel.findById(chapterId);
+		if (!chapter) {
+			return res.status(404).json({
+				message: "Chapter not found",
+			});
+		}
+
+		const allowedUpdates = [
+			"name",
+			"desc",
+			"video",
+			"article",
+			"document",
+			"playgroundType",
+		];
+
+		const updates = Object.keys(req.body);
+		const areUpdatesValid = updates.every((update) => {
+			if (!allowedUpdates.includes(update)) {
+				return false;
+			} else {
+				return true;
+			}
+		});
+
+		if (!areUpdatesValid) {
+			return res.status(400).json({
+				message: "Invalid updates",
+			});
+		}
+
+		updates.forEach((update) => {
+			chapter[update] = req.body[update];
+		});
+
+		await chapter.save();
+		return res.status(200).json({
+			message: "Chapter updated successfully",
+			chapter,
+		});
+	} catch (error) {
+		console.log("Error while updating chapter : ", error);
+		return res.status(500).json({
+			message: "Chapter updated successfully",
+		});
+	}
+};
