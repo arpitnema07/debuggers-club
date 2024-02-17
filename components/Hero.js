@@ -2,7 +2,13 @@ import React from "react";
 import HeroImage from "../public/images/image1.jpeg";
 import Image from "next/image";
 import { FaAngleRight } from "react-icons/fa6";
-import cardImage from "../public/images/image2.png";
+import cardImage from "../public/images/banner.jpg";
+import cardImage1 from "../public/images/Web-Dev.jpg";
+import cardImage2 from "../public/images/react.js-img.png";
+import cardImage3 from "../public/images/git-github.png";
+import cardImage4 from "../public/images/css.png";
+import cardImage5 from "../public/images/course1.png";
+
 import Link from "next/link";
 const Hero = () => {
   return (
@@ -11,7 +17,7 @@ const Hero = () => {
       {/* top section  */}
       <div className="flex gap-4 mt-4">
         <div className="w-1/2">
-          <Image src={HeroImage} alt="img" className="w-full" />
+          <Image src={cardImage} alt="img" className="w-full" />
         </div>
         <div className="w-1/2 px-8 ">
           <p className="font-semibold text-center my-5 text-[24px]">
@@ -48,7 +54,7 @@ const Hero = () => {
           <div className="grid grid-cols-2 justify-between gap-32 mx-28">
             {/* card 1 */}
             <div className=" border-2 ">
-              <Image src={cardImage} alt="card" className="w-full" />
+              <Image src={cardImage5} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -59,7 +65,7 @@ const Hero = () => {
             </div>
             {/* card 2 */}
             <div className=" border-2 ">
-              <Image src={cardImage} alt="card" className="w-full" />
+              <Image src={cardImage1} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -70,7 +76,7 @@ const Hero = () => {
             </div>
             {/* card 3 */}
             <div className=" border-2 ">
-              <Image src={cardImage} alt="card" className="w-full" />
+              <Image src={cardImage2} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -81,7 +87,7 @@ const Hero = () => {
             </div>
             {/* card 4 */}
             <div className=" border-2 ">
-              <Image src={cardImage} alt="card" className="w-full" />
+              <Image src={cardImage3} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -93,7 +99,7 @@ const Hero = () => {
             </div>
              {/* card 5 */}
              <div className=" border-2 ">
-              <Image src={cardImage} alt="card" className="w-full" />
+              <Image src={cardImage4} alt="card" className="w-full" />
               <h2 className="text-xl font-normal p-2">This is card Heading</h2>
               <p className="p-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.

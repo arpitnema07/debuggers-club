@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../../../components/Header";
-import cardImage from "../../../../public/images/image2.png";
+import cardImage1 from "../../../../public/images/Web-Dev.jpg";
 import Image from "next/image";
 import user from "../../../../public/images/blank-profile-picture.webp";
 
@@ -26,7 +26,7 @@ const page = () => {
         </div>
         <div className="flex justify-center my-3">
           <Image
-            src={cardImage}
+            src={cardImage1}
             alt="img"
             className="w-5/6 flex justify-center text-center"
           />
