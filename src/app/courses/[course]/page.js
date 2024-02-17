@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Reviews from "../../../../components/Reviews";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Link from "next/link";
 // import cardImage from "../../../../public/images/course2.jpg";
 
 const page = (props) => {
@@ -47,9 +48,11 @@ const page = (props) => {
         <div className="flex gap-2 my-3">
           <div className="ml-auto">
             {/* <button className="text-white bg-blue-700  rounded-md py-2 px-4 ">Enroll Now</button> */}
-            <button className="text-white bg-blue-700 ml-auto rounded-md py-2 px-4 mr-4">
-              Call A Mentor
-            </button>
+            <Link href={"/mentors"}>
+              <button className="text-white bg-blue-700 ml-auto rounded-md py-2 px-4 mr-4">
+                Call A Mentor
+              </button>
+            </Link>
           </div>
         </div>
         <div className=" flex px-5 mb-6">
