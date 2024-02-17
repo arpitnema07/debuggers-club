@@ -32,10 +32,10 @@ const Header = () => {
             router.push("/");
           }}
         >
-          Debuggers Club
+         EDBuggers
         </div>
         <div className="w-1/2 ">
-          <div className="flex gap-4 justify-evenly items-center">
+          <div className="flex gap-4 justify-evenly items-center  bg:#FAEAE1">
             <div
               className="cursor-pointer"
               onClick={() => {
