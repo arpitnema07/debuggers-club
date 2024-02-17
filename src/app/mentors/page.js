@@ -9,6 +9,8 @@ const page = () => {
         <script src="/socket.io/socket.io.js" />
         <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
         <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+        <script src="./temp.js`"></script>
+        <script src="script.js"></script>
       </Head>
       <div className="header">
         <div className="logo">
