@@ -1,18 +1,25 @@
 "use client";
 
 import React from "react";
-import CodeEditor from "../../../components/CodeEditor";
+import CodeEditor from "../../../components/CodeEditor.jsx";
 import HtmlEditor from "../../../components/HtmlEditor.js";
 
-export default function page() {
+export default function page({ playgroundType, algoType }) {
   return (
     <div>
-      {/* <iframe
-        src="/algo/bst"
-        frameBorder="0"
-        className="w-full h-full"
-      ></iframe> */}
-      <HtmlEditor />
+      {playgroundType == "web" ? (
+        <HtmlEditor />
+      ) : playgroundType == "dsa" ? (
+        <CodeEditor />
+      ) : playgroundType == "algo" ? (
+        <iframe
+          src={`algo/${algoType}`}
+          frameBorder="0"
+          className="w-full h-full"
+        ></iframe>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
