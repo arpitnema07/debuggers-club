@@ -14,6 +14,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { FaAngleDown } from "react-icons/fa6";
 import moment from "moment";
 import { CiCalendarDate } from "react-icons/ci";
+import Link from "next/link";
+import Footer from "../../../../components/Footer";
 
 const page = (props) => {
   const accessToken = Cookies.get("accessToken");
@@ -38,7 +40,7 @@ const page = (props) => {
         }
       );
       // console.log("data", data);
-      setSingleCources(data?.courses[0]);
+      setSingleCources(data?.course[0]);
     } catch (error) {
       console.log("error", error);
     }
@@ -47,7 +49,7 @@ const page = (props) => {
   return (
     <>
       <Header />
-      <div className="pt-4">
+      <div className="py-4">
         <div className="flex gap-2 my-3">
           <div className="ml-auto">
             {/* <button className="text-white bg-blue-700  rounded-md py-2 px-4 ">Enroll Now</button> */}
@@ -62,10 +64,11 @@ const page = (props) => {
           <Image src={cardImage} alt="img" className="w-1/3 " />
           <div className="px-10 w-2/3 ">
             {" "}
-            <h3 className="mb-3 text-2xl font-semibold">{singleCources?.name} </h3>
+            <h3 className="mb-3 text-2xl font-semibold">
+              {singleCources?.name}{" "}
+            </h3>
             <p className="text-gray-700 my-4">{singleCources?.shortDesc}</p>
-             
-            <div className="flex gap-4 justify-around items-center text-sm text-gray-500">
+            <div className="flex gap-4 justify-between items-center text-sm text-gray-500">
               <p className="flex gap-2 items-center text-sm">
                 {" "}
                 <span>
@@ -84,19 +87,20 @@ const page = (props) => {
                 <span>Difficulty Level :</span>{" "}
                 <span>{singleCources?.difficulty}</span>{" "}
               </p>
-             
             </div>
             <ul className="flex font-medium my-3 text-gray-400 px-3 gap-3">
-                {/* <span>Tags</span> */}
-                {singleCources?.tags?.map((data) => {
-                  return <li className="	"> {data}</li>;
-                })}
-              </ul>
+              {/* <span>Tags</span> */}
+              {singleCources?.tags?.map((data) => {
+                return <li className="	"> {data}</li>;
+              })}
+            </ul>
           </div>
         </div>
         <div className="px-8">
           <h3 className="text-lg font-bold my-4">Course Content</h3>
-          <p className="text-sm mb-2">{singleCources?.chapters?.length} Chapters</p>
+          <p className="text-sm mb-2">
+            {singleCources?.chapters?.length} Chapters
+          </p>
         </div>
         {singleCources?.chapters?.map((data, i) => {
           console.log("name", data);
@@ -141,10 +145,11 @@ const page = (props) => {
           );
         })}
 
-        <div>
+        <div className="mb-4">
           <Reviews />
         </div>
       </div>
+      <Footer />
     </>
   );
 };

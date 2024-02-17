@@ -4,7 +4,7 @@ import Image from "next/image";
 import user from "../public/images/blank-profile-picture.webp";
 const Reviews = () => {
   return (
-    <div className="mx-10 h-[50vh]">
+    <div className="mx-10">
       <hr className="my-4 text-gray-500" />
       <h3 className="flex items-center text-xl  mb-4">Reviews</h3>
       <div>

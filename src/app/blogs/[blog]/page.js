@@ -1,14 +1,15 @@
+"use client";
 import React from "react";
 import Header from "../../../../components/Header";
 import cardImage1 from "../../../../public/images/Web-Dev.jpg";
 import Image from "next/image";
 import user from "../../../../public/images/blank-profile-picture.webp";
-
+import Footer from "../../../../components/Footer";
 const page = () => {
   return (
     <div>
       <Header />
-      <div className="mt-5">
+      <div className="my-10">
         <h2 className="font-semibold text-center text-2xl">
           Web Development Roadmap
         </h2>
@@ -18,10 +19,10 @@ const page = () => {
             unoptimized
             src={user}
             className="w-12 h-12 rounded-full cursor-pointer "
-          /> 
+          />
           <div className="">
-          <h4 className="text-left text-lg">Sandhya Ginare</h4>
-          <p className="text-sm">Created on 02/02/2024</p>
+            <h4 className="text-left text-lg">Sandhya Ginare</h4>
+            <p className="text-sm">Created on 02/02/2024</p>
           </div>
         </div>
         <div className="flex justify-center my-3">
@@ -47,6 +48,7 @@ const page = () => {
         </div>
         <div></div>
       </div>
+      <Footer />
     </div>
   );
 };
