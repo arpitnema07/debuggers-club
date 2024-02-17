@@ -132,7 +132,14 @@ export const getProfile = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
 	try {
-		const allowedUpdates = ["name", "username"];
+		const allowedUpdates = [
+			"name",
+			"username",
+			"phone",
+			"state",
+			"country",
+			"qualification",
+		];
 		const updates = Object.keys(req.body);
 		const areUpdatesValid = updates.every((update) => {
 			if (!allowedUpdates.includes(update)) {
