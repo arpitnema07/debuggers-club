@@ -28,6 +28,19 @@ const userSchema = mongoose.Schema(
 			enum: ["user", "admin"],
 			default: "user",
 		},
+		phone: {
+			type: String,
+		},
+		state: {
+			type: String,
+		},
+		country: {
+			type: String,
+		},
+		qualification: {
+			type: String,
+			enum: ["10+2", "Diploma", "Graduation", "Post-Graduation"],
+		},
 		enrolledCourses: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
