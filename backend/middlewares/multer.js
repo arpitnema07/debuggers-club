@@ -5,7 +5,7 @@ import path from "path";
 export const imageUpload = multer({
 	storage,
 	fileFilter: function (req, file, cb) {
-		checkFileType(file, cb);
+		return checkFileType(file, cb);
 	},
 });
 
