@@ -27,7 +27,7 @@ const chapterSchema = mongoose.Schema(
 		},
 		playgroundType: {
 			type: String,
-			enum: ["web", "dsa", "algo"],
+			enum: ["web", "dsa", "bst", "path", "sorting", "trie"],
 		},
 	},
 	{ timestamps: true }
