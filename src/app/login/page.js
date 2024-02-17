@@ -31,11 +31,11 @@ const page = () => {
     try {
       const { data } = await axios.post(`/api/users/login`, value);
       Cookies.set("accessToken", data?.accessToken);
-      console.log("data", data);
-      // router.push("/");
+      router.push("/");
     } catch (error) {
       if (error?.response?.status === 404) {
         setUserError(error?.response?.data?.message);
+        router.push("/register");
       }
       if (error?.response?.data?.message === "Invalid username or password") {
         setInvalidPassword(error?.response?.data?.message);

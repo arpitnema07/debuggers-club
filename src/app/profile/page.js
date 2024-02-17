@@ -9,12 +9,14 @@ const page = () => {
   const { register, handleSubmit, setValue } = useForm();
   const [file, setFile] = useState();
   const [selected, setSelected] = useState();
+  const [getImg, setGetImg] = useState([]);
+  const [getEmail, setGetEmail] = useState([]);
+  const [getUsername, setGetUsername] = useState([]);
 
-  const qualification = ["Diploma", "Graduation", "10 + 12", "Post-Graduation"];
+  const qualification = ["10+2", "Diploma", "Graduation", "Post-Graduation"];
 
   const editUserProfile = async (value) => {
     try {
-      console.log("file", file);
       const formData = new FormData();
       formData.append("profileImage", file);
       formData.append("name", value?.name);
@@ -55,9 +57,11 @@ const page = () => {
       setValue("country", data?.user?.country);
       setValue("state", data?.user?.state);
       setValue("qualification", data?.user?.qualification);
+      setGetImg(data?.user?.profileImage);
+      setGetEmail(data?.user?.email);
+      setGetUsername(data?.user?.username);
     } catch (error) {}
   };
-  console.log("selected", selected);
 
   return (
     <>
@@ -75,10 +79,15 @@ const page = () => {
               <img
                 className="rounded-circle mt-5"
                 width="150px"
-                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                // src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                src={
+                  getImg
+                    ? `/${getImg}`
+                    : "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                }
               />
-              <span className="font-weight-bold">Edogaru</span>
-              <span className="text-black-50">edogaru@mail.com.my</span>
+              <span className="font-weight-bold">{getUsername}</span>
+              <span className="text-black-50">{getEmail}</span>
               <span> </span>
             </div>
           </div>
