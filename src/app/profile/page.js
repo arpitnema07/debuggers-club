@@ -1,10 +1,15 @@
 "use client";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { CiHome } from "react-icons/ci";
+import { UserContext, useUserContext } from "../context/page";
 
 const page = () => {
+  const { user } = useUserContext();
+  console.log("user", user);
   const accessToken = Cookies.get("accessToken");
   const { register, handleSubmit, setValue } = useForm();
   const [file, setFile] = useState();
@@ -73,6 +78,10 @@ const page = () => {
       </head>
 
       <div className="container rounded bg-white mt-5 mb-5">
+        <Link href="/">
+          <CiHome />
+        </Link>
+
         <div className="row">
           <div className="col-md-3 border-right">
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
