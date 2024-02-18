@@ -23,7 +23,12 @@ app.prepare().then(() => {
   mainServer.use((req, res, next) => {
     const path = req.path;
     console.log(path);
-    if (path.startsWith("/api") || path.startsWith("/algo")) {
+    if (
+      path.startsWith("/api") ||
+      path.startsWith("/algo") ||
+      path.startsWith("/call") ||
+      path.startsWith("/peer")
+    ) {
       next();
     } else {
       return handle(req, res);
@@ -31,6 +36,32 @@ app.prepare().then(() => {
   });
   mainServer.use(express.static(join(__dirname, "public")));
 
+  mainServer.set("view engine", "ejs");
+  const opinions = {
+    debug: true,
+  };
+
+  io.on("connection", (socket) => {
+    socket.on("join-room", (roomId, userId, userName) => {
+      socket.join(roomId);
+      setTimeout(() => {
+        socket.broadcast.to(roomId).emit("user-connected", userId);
+      }, 1000);
+      socket.on("message", (message) => {
+        io.to(roomId).emit("createMessage", message, userName);
+      });
+    });
+  });
+
+  mainServer.use("/call/peerjs", ExpressPeerServer(server, opinions));
+
+  mainServer.get("/call", (req, res) => {
+    res.redirect(`/call/mentor`);
+  });
+
+  mainServer.get("/call/:room", (req, res) => {
+    res.render("room", { roomId: req.params.room });
+  });
   // Define a route for the root URL
   mainServer.get("/algo/bst", (req, res) => {
     res.sendFile(join(__dirname, "public", "bst.html"));
