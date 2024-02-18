@@ -1,50 +1,77 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../../../components/Header";
 import cardImage1 from "../../../../public/images/Web-Dev.jpg";
 import Image from "next/image";
 import user from "../../../../public/images/blank-profile-picture.webp";
 import Footer from "../../../../components/Footer";
-const page = () => {
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import axios from "axios";
+import moment from "moment";
+
+const page = (props) => {
+  console.log("props :>> ", props?.params?.blog);
+
+  const accessToken = Cookies.get("accessToken");
+  const [singleBlog, setSingleBlog] = useState();
+  const router = useRouter();
+  console.log("singleBlog :>> ", singleBlog);
+
+  useEffect(() => {
+    if (props?.params?.blog) {
+      getSingleBlog();
+    }
+  }, [props?.params?.blog]);
+
+  const getSingleBlog = async () => {
+    try {
+      const { data } = await axios.get(`/api/blogs/${props?.params?.blog}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log("data", data);
+      setSingleBlog(data?.blog);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   return (
     <div>
       <Header />
       <div className="my-10">
         <h2 className="font-semibold text-center text-2xl">
-          Web Development Roadmap
+          {singleBlog?.title}{" "}
         </h2>
         <div className="mx-28 flex justify-center my-6 gap-6 text-center">
-          <Image
-            alt="aa"
-            unoptimized
-            src={user}
-            className="w-12 h-12 rounded-full cursor-pointer "
-          />
+          {singleBlog?.userId?.profileImage ? (
+            <img src={`${singleBlog?.userId?.profileImage}`} alt="uu" />
+          ) : (
+            <Image
+              alt="aa"
+              unoptimized
+              src={user}
+              className="w-12 h-12 rounded-full cursor-pointer "
+            />
+          )}
+
           <div className="">
-            <h4 className="text-left text-lg">Sandhya Ginare</h4>
-            <p className="text-sm">Created on 02/02/2024</p>
+            <h4 className="text-left text-lg">{singleBlog?.userId?.name}</h4>
+            <p className="text-sm">
+              Created on {moment(singleBlog?.createdAt).format("LLL")}
+            </p>
           </div>
         </div>
         <div className="flex justify-center my-3">
-          <Image
-            src={cardImage1}
+          <img
+            src={`/${singleBlog?.blogImage}`}
             alt="img"
             className="w-5/6 flex justify-center text-center"
           />
         </div>
         <div className="mx-28 ">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ipsa
-            necessitatibus, facere minima modi corporis esse dolor laborum illum
-            harum quia nemo cupiditate saepe! Atque libero magni amet, ipsa
-            suscipit, iure exercitationem est eaque laborum sed, praesentium
-            voluptates ratione dolores error maiores quis incidunt fugiat. Illum
-            impedit eos similique aspernatur veniam veritatis amet, nostrum
-            autem qui magni quaerat, voluptas commodi et adipisci culpa atque
-            alias ipsam debitis eligendi. Dolorum qui alias asperiores quis.
-            Cupiditate consequatur rerum incidunt, est exercitationem minima.
-            Similique iure velit ut at sunt quisquam sit, recusandae dolore!
-          </p>
+          <p>{singleBlog?.desc}</p>
         </div>
         <div></div>
       </div>
