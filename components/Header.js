@@ -34,9 +34,9 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex items-center  justify-bewteen items-center bg-gray-100 p-4 shadow-md">
+      <div className="flex items-center  justify-bewteen bg-gray-100 p-4 shadow-md">
         <div
-          className="w-1/3 cursor-pointer font-serif text-blue-600 font-bold text-lg "
+          className="w-1/4 cursor-pointer font-serif text-blue-600 font-bold text-2xl "
           onClick={() => {
             router.push("/");
           }}
@@ -109,9 +109,10 @@ const Header = () => {
                       <IoSearchOutline className="bg-gray-300 m-0" />
                     </div>
                     <div>
-                      <img
+                      <Image
                         alt="aa"
-                        src={isToken ? `/${user?.profileImage}` : User}
+                        unoptimized
+                        src={user}
                         className="w-12 h-12 rounded-full cursor-pointer "
                         onClick={handleShow}
                       />
