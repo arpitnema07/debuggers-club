@@ -37,6 +37,8 @@ const page = (props) => {
       <Header />
       {/* Code for chapters */}
       <div className="flex mb-10">
+
+      
         <div className="p-2 w-1/2">
           <video
             controls={true}
