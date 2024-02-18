@@ -62,7 +62,7 @@ const Hero = () => {
             <h2 className="text-center text-2xl font-semibold mb-6">
               Our Courses
             </h2>
-            <div className="grid grid-cols-2 justify-between gap-32 mx-28">
+            <div className="grid grid-cols-3 justify-between gap-16 mx-12">
               {/* card 1 */}
               {allCources?.map((data, i) => {
                 return (

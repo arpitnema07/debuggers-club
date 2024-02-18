@@ -9,6 +9,8 @@ import cardImage4 from "../../../public/images/css.png";
 import Footer from '../../../components/Footer';
 import Header from '../../../components/Header';
 import Link from 'next/link';
+import axios from 'axios';
+
 const page = () => {
   return (
     <div>
@@ -17,7 +19,7 @@ const page = () => {
        <div className="w-full my-10">
         <div className="p-4">
         
-          <div className="grid grid-cols-2 justify-between gap-32 mx-28">
+          <div className="grid grid-cols-3 justify-between gap-16 mx-12">
             {/* card 1 */}
             <div className=" border-2 ">
               <Image src={cardImage1} alt="card" className="w-full" />
