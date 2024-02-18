@@ -16,6 +16,7 @@ import moment from "moment";
 import { CiCalendarDate } from "react-icons/ci";
 import Link from "next/link";
 import Footer from "../../../../components/Footer";
+import user from "../../../../public/images/blank-profile-picture.webp";
 
 const page = (props) => {
   const accessToken = Cookies.get("accessToken");
@@ -51,7 +52,7 @@ const page = (props) => {
         <div className="flex gap-2 my-3">
           <div className="ml-auto">
             {/* <button className="text-white bg-blue-700  rounded-md py-2 px-4 ">Enroll Now</button> */}
-            <Link href={"/mentors"}>
+            <Link href={"/call/mentor"}>
               <button className="text-white bg-blue-700 ml-auto rounded-md py-2 px-4 mr-4">
                 Call A Mentor
               </button>
@@ -138,7 +139,54 @@ const page = (props) => {
         })}
 
         <div className="mb-4">
-          <Reviews />
+          {/* <Reviews /> */}
+          <div className="mx-10">
+            <hr className="my-4 text-gray-500" />
+            <h3 className="flex items-center text-xl  mb-4">Reviews</h3>
+
+            {singleCources?.reviews?.map((review, i) => {
+              return (
+                <>
+                  <div>
+                    <div>
+                      <div className="flex gap-2 ">
+                        {review?.user?.profileImage ? (
+                          <img
+                            alt="aa"
+                            unoptimized
+                            src={`/${review?.user?.profileImage}`}
+                            className="w-12 h-12 rounded-full"
+                          />
+                        ) : (
+                          <Image
+                            alt="aa"
+                            unoptimized
+                            src={user}
+                            className="w-12 h-12 rounded-full"
+                          />
+                        )}
+                        <div>
+                          <div className="">
+                            <p>{review?.user?.name}</p>
+                            <p className="text-[12px] text-gray-400">
+                              created on{" "}
+                              <span>
+                                {moment(review?.createdAt).format("LLL")}
+                              </span>
+                            </p>
+                          </div>
+                          <div className="w-2/3 mt-3 text-gray-700 text-[12px]">
+                            <p>{review?.content}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="my-4" />
+                  </div>
+                </>
+              );
+            })}
+          </div>
         </div>
       </div>
       <Footer />
