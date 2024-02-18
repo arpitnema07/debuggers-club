@@ -36,7 +36,8 @@ app.prepare().then(() => {
     if (
       path.startsWith("/api") ||
       path.startsWith("/algo") ||
-      path.startsWith("/call")
+      path.startsWith("/call") ||
+      path.startsWith("/peer")
     ) {
       next();
     } else {
@@ -55,7 +56,7 @@ app.prepare().then(() => {
     socket.on("join-room", (roomId, userId, userName) => {
       socket.join(roomId);
       setTimeout(() => {
-        socket.to(roomId).broadcast.emit("user-connected", userId);
+        socket.broadcast.to(roomId).emit("user-connected", userId);
       }, 1000);
       socket.on("message", (message) => {
         io.to(roomId).emit("createMessage", message, userName);
@@ -66,7 +67,7 @@ app.prepare().then(() => {
   mainServer.use("/call/peerjs", ExpressPeerServer(server, opinions));
 
   mainServer.get("/call", (req, res) => {
-    res.redirect(`/call/mentor}`);
+    res.redirect(`/call/mentor`);
   });
 
   mainServer.get("/call/:room", (req, res) => {
