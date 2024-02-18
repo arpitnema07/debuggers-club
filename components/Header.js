@@ -12,8 +12,7 @@ import { useUserContext } from "@/app/context/page";
 const Header = () => {
   const router = useRouter();
   const token = Cookies.get("accessToken");
-  const { user } = useUserContext();
-  console.log("user", user);
+  const { setSearch, user } = useUserContext();
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -101,7 +100,9 @@ const Header = () => {
                 <div className="border-gray-400 border-[1px] flex items-center rounded-md bg-white m-2">
                   <input
                     placeholder="search..."
-                    className="m-2 outline-none  "
+                    className="m-2 outline-none"
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="search"
                   />
                   <div className="m-0 p-0 h-full flex items-center justify-center bg-gray-300 w-10">
                     <IoSearchOutline className=" m-0" />
@@ -137,7 +138,7 @@ const Header = () => {
               </div>
             )}
           </div>
-        </div>
+        </div>{" "}
       </div>
     </>
   );

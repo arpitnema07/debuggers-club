@@ -32,6 +32,7 @@ export default function UserDataContext({ children }) {
   const accessToken = Cookies.get("accessToken");
 
   const [user, setUser] = useState(null);
+  const [search, setSearch] = useState();
 
   const getUserData = async () => {
     try {
@@ -50,6 +51,8 @@ export default function UserDataContext({ children }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, search, setSearch }}>
+      {children}
+    </UserContext.Provider>
   );
 }
