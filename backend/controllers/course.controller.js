@@ -5,7 +5,6 @@ import "dotenv/config";
 
 export const getCourses = async (req, res) => {
 	const search = req.query.search;
-	const tags = req.query.tags;
 	const page = parseInt(req.query.page) || 1;
 	const limit = parseInt(req.query.limit) || 10;
 
@@ -15,11 +14,10 @@ export const getCourses = async (req, res) => {
 			{ name: { $regex: search, $options: "i" } },
 			{ desc: { $regex: search, $options: "i" } },
 			{ shortDesc: { $regex: search, $options: "i" } },
+			{ tags: { $regex: search, $options: "i" } },
 		];
 	}
-	if (tags) {
-		filter.tags = { $in: tags.split(",") };
-	}
+
 	try {
 		const courses = await courseModel
 			.find(filter)

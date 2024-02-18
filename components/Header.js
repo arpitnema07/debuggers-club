@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import Image from "next/image";
 import User from "../public/images/blank-profile-picture.webp";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
@@ -17,12 +16,10 @@ const Header = () => {
   const handleShow = () => {
     setShow(!show);
   };
-
   const logout = () => {
     Cookies.remove("accessToken");
     router.push("/login");
   };
-
   return (
     <>
       <div className="flex items-center  justify-bewteen bg-gray-100 p-4 shadow-md">
@@ -143,5 +140,4 @@ const Header = () => {
     </>
   );
 };
-
 export default Header;

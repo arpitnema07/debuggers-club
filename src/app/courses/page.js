@@ -8,39 +8,60 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Footer from "../../../components/Footer";
+import { toast } from "react-toastify";
+import { IoSearchOutline } from "react-icons/io5";
+import { useUserContext } from "../context/page";
+
 const page = () => {
+  const { search } = useUserContext();
   const accessToken = Cookies.get("accessToken");
   const router = useRouter();
   const [allCources, setAllCources] = useState([]);
-  console.log("allCources :>> ", allCources);
+  // const [searchKey, setSearchKey] = useState("");
   useEffect(() => {
     if (accessToken) {
       getAllCources();
     }
-  }, []);
+  }, [search]);
 
   const getAllCources = async () => {
     try {
-      const { data } = await axios.get("/api/courses", {
+      let apiUrl = "/api/courses";
+      if (search) {
+        apiUrl += `?search=${search}`;
+      }
+      const { data } = await axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("data", data);
       setAllCources(data?.courses);
     } catch (error) {}
   };
   return (
     <div>
       <Header />
-      <div className="my-10">
+      <div className="mb-10 mt-4">
+        {/*        <div className="flex">
+          <div className="border-gray-400 border-[1px] flex items-center rounded-md bg-white m-2 ml-auto">
+            <input
+              type="search"
+              placeholder="search courses.."
+              className="m-2 outline-none	"
+              value={searchKey}
+              onChange={(e) => setSearchKey(e.target.value)}
+            />
+            <div className="m-0 p-0 h-full flex items-center justify-center bg-gray-300 w-10">
+              <IoSearchOutline className=" m-0" onClick={getAllCources} />
+            </div>
+          </div>
+        </div>*/}
         {/* cards  */}
         <div className="w-full my-10">
           <div className="p-4">
             <div className="flex flex-col gap-5">
               {/* card 1 */}
               {allCources?.map((data, i) => {
-                console.log("data?.images", data);
                 return (
                   <div
                     className="border-gray-400 rounded-lg border-1 flex mx-10 "
@@ -64,6 +85,8 @@ const page = () => {
                   </div>
                 );
               })}
+              {!allCources ||
+                (allCources?.length < 1 && <div>Course Not Found !!</div>)}
             </div>
           </div>
         </div>

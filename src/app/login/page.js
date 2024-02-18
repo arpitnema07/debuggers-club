@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const schema = yup
   .object()
@@ -20,6 +21,7 @@ const page = () => {
   const router = useRouter();
   const [userError, setUserError] = useState([]);
   const [invalidPassword, setInvalidPassword] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   const {
     register,
@@ -29,10 +31,14 @@ const page = () => {
 
   const userLogin = async (value) => {
     try {
+      setLoader(true)
       const { data } = await axios.post(`/api/users/login`, value);
       Cookies.set("accessToken", data?.accessToken);
+      toast.success(data?.message || "Login Successfull")
       router.push("/");
+      setLoader(false)
     } catch (error) {
+      setLoader(false)
       if (error?.response?.status === 404) {
         setUserError(error?.response?.data?.message);
         router.push("/register");
@@ -172,9 +178,9 @@ const page = () => {
                   <button
                     type="submit"
                     className="btn btn-primary btn-lg"
-                    style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
+                    style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem", display: "flex", justifyContent: "center", alignItems:"center", gap:"10px" }}
                   >
-                    Login
+                 {loader && <i class="fa fa-spinner fa-spin "></i> }  Login
                   </button>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
