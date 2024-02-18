@@ -68,7 +68,7 @@ const page = () => {
                     <Image src={cardImage1} alt="card" className="w-full rounded-lg" />
                     <h2 className="text-xl font-normal px-4 mt-2">{blog?.title}</h2>
                     <p className="p-4 mt-2">{blog?.desc}</p>
-                    <Link href={`/blogs/{id}`} className="text-green-500  px-4 mb-2">
+                    <Link href={`/blogs/${blog?._id}`} className="text-green-500  px-4 mb-2">
                       Read More
                     </Link>
                   </div>
