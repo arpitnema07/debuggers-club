@@ -39,10 +39,15 @@ const Header = () => {
             router.push("/");
           }}
         >
-          Debuggers Club
+         EDBuggers
         </div>
+ {/* HEAD */}
+        <div className="w-1/2 ">
+          <div className="flex gap-4 justify-evenly items-center  bg:#FAEAE1">
+
         <div className="flex w-2/3 items-center">
           <div className="flex gap-3 justify-between mx-4">
+{/* >>>>>>> e94ea75c4f305195f06831251998d0026eaa00a5 */}
             <div
               className="cursor-pointer"
               onClick={() => {
@@ -134,6 +139,7 @@ const Header = () => {
             )}
           </div>
         </div>
+        </div>
         {/* <div className="flex">
           <div className="flex-initial gap-4 justify-evenly items-center">
             <div
@@ -224,17 +230,8 @@ const Header = () => {
           </div>
         </div> */}
       </div>
-    </>
+   </div> </>
   );
 };
 
 export default Header;
-
-{
-  /* <select className={show ? "visited" : "hidden"}>
-                        <option>
-                          <Link href={"/profile"}>Profile</Link>
-                        </option>
-                        <option>Logout</option>
-                      </select> */
-}
