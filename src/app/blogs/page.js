@@ -38,7 +38,7 @@ const page = () => {
       });
       console.log("data :>> ", data);
 
-      setAllBlogs(data?.courses);
+      setAllBlogs(data?.blogs);
     } catch (error) {}
   };
   return (
@@ -61,64 +61,20 @@ const page = () => {
         <div className="p-4">
           <div className="grid grid-cols-3 justify-between gap-16 mx-12">
             {/* card 1 */}
-            <div className=" border-2 ">
-              <Image src={cardImage1} alt="card" className="w-full" />
-              <h2 className="text-xl font-normal p-2">This is card Heading</h2>
-              <p className="p-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga
-              </p>
-              <Link href="/blogs/1" className="text-green-500 p-2">
-                Read More
-              </Link>
-            </div>
-            {/* card 2 */}
-            <div className=" border-2 ">
-              <Image src={cardImage} alt="card" className="w-full" />
-              <h2 className="text-xl font-normal p-2">This is card Heading</h2>
-              <p className="p-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga
-              </p>
-              <button className="text-green-500 p-2">Read More</button>
-            </div>
-            {/* card 3 */}
-            <div className=" border-2 ">
-              <Image src={cardImage2} alt="card" className="w-full" />
-              <h2 className="text-xl font-normal p-2">This is card Heading</h2>
-              <p className="p-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga
-              </p>
-              <button className="text-green-500 p-2">Read More</button>
-            </div>
-            {/* card 4 */}
-            <div className=" border-2 ">
-              <Image src={cardImage3} alt="card" className="w-full" />
-              <h2 className="text-xl font-normal p-2">This is card Heading</h2>
-              <p className="p-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga
-              </p>
-
-              <button className="text-green-500 p-2">Read More</button>
-            </div>
-            {/* card 5 */}
-            <div className=" border-2 ">
-              <Image src={cardImage4} alt="card" className="w-full" />
-              <h2 className="text-xl font-normal p-2">This is card Heading</h2>
-              <p className="p-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Recusandae a, pariatur quo quos itaque maxime, inventore
-                perspiciatis totam fuga
-              </p>
-
-              <button className="text-green-500 p-2">Read More</button>
-            </div>
+            {allBlogs?.map((blog, i) => {
+              return (
+                <>
+                  <div className=" border-2 rounded-lg shadow-md">
+                    <Image src={cardImage1} alt="card" className="w-full rounded-lg" />
+                    <h2 className="text-xl font-normal px-4 mt-2">{blog?.title}</h2>
+                    <p className="p-4 mt-2">{blog?.desc}</p>
+                    <Link href={`/blogs/{id}`} className="text-green-500  px-4 mb-2">
+                      Read More
+                    </Link>
+                  </div>
+                </>
+              );
+            })}
           </div>
         </div>
       </div>

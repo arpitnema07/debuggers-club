@@ -6,7 +6,6 @@ import { FaAngleRight } from "react-icons/fa6";
 import cardImage from "../../../public/images/back.png";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { IoSearchOutline } from "react-icons/io5";
 import Cookies from "js-cookie";
 import Footer from "../../../components/Footer";
 import { toast } from "react-toastify";
@@ -17,7 +16,6 @@ const page = () => {
   const router = useRouter();
   const [allCources, setAllCources] = useState([]);
   const [searchKey, setSearchKey] = useState("");
-
   useEffect(() => {
     if (accessToken) {
       getAllCources();
