@@ -10,9 +10,9 @@ import { IoSearchOutline } from "react-icons/io5";
 import { useUserContext } from "@/app/context/page";
 
 const Header = () => {
+  const { user } = useUserContext();
   console.log("user", user);
   const router = useRouter();
-  const { user } = useUserContext();
   const [isToken, setIsToken] = useState();
   useEffect(() => {
     const token = Cookies.get("accessToken");
@@ -200,7 +200,7 @@ const Header = () => {
             ) : (
               <>
                 <div>
-                  <img
+                  <Image
                     alt="aa"
                     unoptimized
                     src={user}

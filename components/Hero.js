@@ -17,18 +17,12 @@ const Hero = () => {
   const [allCources, setAllCources] = useState([]);
 
   useEffect(() => {
-    if (accessToken) {
-      getAllCources();
-    }
+    getAllCources();
   }, []);
 
   const getAllCources = async () => {
     try {
-      const { data } = await axios.get("/api/courses", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const { data } = await axios.get("/api/courses");
       console.log("data", data);
       setAllCources(data?.courses);
     } catch (error) {}
@@ -39,19 +33,22 @@ const Hero = () => {
         {/* top section  */}
         <div className="flex gap-4 mt-4">
           <div className="w-1/2">
-            <Image src={cardImage} alt="img" className="w-full ml-4 p-l"w/>
+            <Image src={cardImage} alt="img" className="w-full ml-4 p-l" w />
           </div>
           <div className="w-1/2 px-8 ">
             <p className="font-semibold text-center my-5 text-[24px] mt-12 pt-12">
-           Welcome To Edbuggers !!
+              Welcome To Edbuggers !!
             </p>
             <p className="mb-3 mt-2 pt-2 text-center">
               {" "}
               Begin your learning journey with us.
             </p>
             <p className="mb-3 mt-2 pt-2 text-center justify-spac">
-           
-             Gain Access to video content, theory materials, and a coding playground. Experience visual algorithm representation and personalized one-on-one mentorshio. We're your exclusive source for comprehensive learning resources and support. Start coding with confidence today !
+              Gain Access to video content, theory materials, and a coding
+              playground. Experience visual algorithm representation and
+              personalized one-on-one mentorshio. We're your exclusive source
+              for comprehensive learning resources and support. Start coding
+              with confidence today !
             </p>
           </div>
         </div>

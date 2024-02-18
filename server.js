@@ -4,17 +4,26 @@ import { join } from "path";
 const port = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
-
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { ExpressPeerServer } from "peer";
+import http from "http";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+import { Server } from "socket.io";
 
 const handle = app.getRequestHandler();
 import backend from "./backend/index.js";
+
 app.prepare().then(() => {
   const mainServer = express();
+  const server = http.Server(mainServer);
+  const io = new Server(server, {
+    cors: {
+      origin: "*",
+    },
+  });
 
   // mainServer.get("/", (req, res) => {
   //   return res.send("All");
@@ -34,6 +43,7 @@ app.prepare().then(() => {
       return handle(req, res);
     }
   });
+
   mainServer.use(express.static(join(__dirname, "public")));
 
   mainServer.set("view engine", "ejs");
@@ -78,9 +88,7 @@ app.prepare().then(() => {
   mainServer.use("/api", backend);
   mainServer.use("/", handle);
 
-  mainServer.listen(port, (err) => {
-    if (err) throw err;
-
-    console.log(`> Ready on http://localhost:${port}`);
+  server.listen(process.env.PORT || 3000, () => {
+    console.log("SERVER IS RUNNING", 3000);
   });
 });
