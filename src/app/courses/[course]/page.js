@@ -21,7 +21,6 @@ const page = (props) => {
   const accessToken = Cookies.get("accessToken");
   const [singleCources, setSingleCources] = useState();
   const router = useRouter();
-  console.log("props", props?.params?.course);
 
   useEffect(() => {
     if (props?.params?.course) {
@@ -45,7 +44,6 @@ const page = (props) => {
       console.log("error", error);
     }
   };
-
   return (
     <>
       <Header />
@@ -61,7 +59,7 @@ const page = (props) => {
           </div>
         </div>
         <div className=" flex px-5 mb-6">
-          <Image src={cardImage} alt="img" className="w-1/3 " />
+          <img src={`/${singleCources?.image}`} alt="img" className="w-1/3 " />
           <div className="px-10 w-2/3 ">
             {" "}
             <h3 className="mb-3 text-2xl font-semibold">
@@ -103,7 +101,6 @@ const page = (props) => {
           </p>
         </div>
         {singleCources?.chapters?.map((data, i) => {
-          console.log("name", data);
           return (
             <>
               <div className="px-8 ">
@@ -129,12 +126,7 @@ const page = (props) => {
                       <MdOutlineOndemandVideo className="w-6 h-6" />
                     </div>
                     {/* {data?.desc} */}
-                    <p className="text-sm">
-                      {" "}
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
-                    </p>
+                    <p className="text-sm"> {data?.desc}</p>
                     <p className="ml-auto text-sm cursor-pointer hover:border-b-[1px] hover:border-blue-600 hover:text-blue-600 ">
                       view video
                     </p>
