@@ -1,15 +1,30 @@
 import mongoose from "mongoose";
 import blogModel from "../models/blog.model.js";
+import path from "path";
+import fs from "fs";
+import { IMAGE_PATH } from "../utils/constants.js";
 
 export const createBlog = async (req, res) => {
 	try {
 		const { title, desc } = req.body;
-		const blog = await blogModel.create({
+		const blog = new blogModel({
 			userId: new mongoose.Types.ObjectId(req.user._id),
 			title,
 			desc,
 		});
 
+		if (req.file) {
+			const fileName =
+				req.file.fieldname +
+				"-" +
+				Date.now() +
+				path.extname(req.file.originalname);
+			fs.writeFileSync(`${IMAGE_PATH}/${fileName}`, req.file.buffer);
+
+			blog.blogImage = `images/${fileName}`;
+		}
+
+		await blog.save();
 		return res.status(200).json({
 			message: "Blog created successfully",
 			blog,
