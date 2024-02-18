@@ -16,12 +16,12 @@ import moment from "moment";
 import { CiCalendarDate } from "react-icons/ci";
 import Link from "next/link";
 import Footer from "../../../../components/Footer";
+import user from "../../../../public/images/blank-profile-picture.webp";
 
 const page = (props) => {
   const accessToken = Cookies.get("accessToken");
   const [singleCources, setSingleCources] = useState();
   const router = useRouter();
-  console.log("props", props?.params?.course);
 
   useEffect(() => {
     if (props?.params?.course) {
@@ -45,7 +45,6 @@ const page = (props) => {
       console.log("error", error);
     }
   };
-
   return (
     <>
       <Header />
@@ -53,7 +52,7 @@ const page = (props) => {
         <div className="flex gap-2 my-3">
           <div className="ml-auto">
             {/* <button className="text-white bg-blue-700  rounded-md py-2 px-4 ">Enroll Now</button> */}
-            <Link href={"/mentors"}>
+            <Link href={"/call/mentor"}>
               <button className="text-white bg-blue-700 ml-auto rounded-md py-2 px-4 mr-4">
                 Call A Mentor
               </button>
@@ -61,7 +60,7 @@ const page = (props) => {
           </div>
         </div>
         <div className=" flex px-5 mb-6">
-          <Image src={cardImage} alt="img" className="w-1/3 " />
+          <img src={`/${singleCources?.image}`} alt="img" className="w-1/3 " />
           <div className="px-10 w-2/3 ">
             {" "}
             <h3 className="mb-3 text-2xl font-semibold">
@@ -103,7 +102,6 @@ const page = (props) => {
           </p>
         </div>
         {singleCources?.chapters?.map((data, i) => {
-          console.log("name", data);
           return (
             <>
               <div className="px-8 ">
@@ -129,12 +127,7 @@ const page = (props) => {
                       <MdOutlineOndemandVideo className="w-6 h-6" />
                     </div>
                     {/* {data?.desc} */}
-                    <p className="text-sm">
-                      {" "}
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
-                    </p>
+                    <p className="text-sm"> {data?.desc}</p>
                     <p className="ml-auto text-sm cursor-pointer hover:border-b-[1px] hover:border-blue-600 hover:text-blue-600 ">
                       view video
                     </p>
@@ -146,7 +139,54 @@ const page = (props) => {
         })}
 
         <div className="mb-4">
-          <Reviews />
+          {/* <Reviews /> */}
+          <div className="mx-10">
+            <hr className="my-4 text-gray-500" />
+            <h3 className="flex items-center text-xl  mb-4">Reviews</h3>
+
+            {singleCources?.reviews?.map((review, i) => {
+              return (
+                <>
+                  <div>
+                    <div>
+                      <div className="flex gap-2 ">
+                        {review?.user?.profileImage ? (
+                          <img
+                            alt="aa"
+                            unoptimized
+                            src={`/${review?.user?.profileImage}`}
+                            className="w-12 h-12 rounded-full"
+                          />
+                        ) : (
+                          <Image
+                            alt="aa"
+                            unoptimized
+                            src={user}
+                            className="w-12 h-12 rounded-full"
+                          />
+                        )}
+                        <div>
+                          <div className="">
+                            <p>{review?.user?.name}</p>
+                            <p className="text-[12px] text-gray-400">
+                              created on{" "}
+                              <span>
+                                {moment(review?.createdAt).format("LLL")}
+                              </span>
+                            </p>
+                          </div>
+                          <div className="w-2/3 mt-3 text-gray-700 text-[12px]">
+                            <p>{review?.content}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="my-4" />
+                  </div>
+                </>
+              );
+            })}
+          </div>
         </div>
       </div>
       <Footer />

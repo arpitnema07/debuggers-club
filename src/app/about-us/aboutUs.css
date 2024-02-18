@@ -1,0 +1,31 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav ul {
+    list-style-type: none;
+}
+
+nav li {
+    display: inline;
+    margin: 0 10px;
+}
+.content {
+    margin: 20px;
+}
+
+.success-story {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.ceo-picture {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    position: relative;
+    top: -20px;
+    right: -20px;
+}
