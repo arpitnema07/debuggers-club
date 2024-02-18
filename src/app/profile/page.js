@@ -24,6 +24,7 @@ const page = () => {
   const [getImg, setGetImg] = useState([]);
   const [getEmail, setGetEmail] = useState([]);
   const [getUsername, setGetUsername] = useState([]);
+  const [showFile, setShowFile] = useState();
 
   const qualification = ["10+2", "Diploma", "Graduation", "Post-Graduation"];
 
@@ -85,6 +86,10 @@ const page = () => {
     } catch (error) {}
   };
 
+  const handleChange = (e) => {
+    setFile(e.target.files[0]);
+    setShowFile(URL.createObjectURL(e.target.files[0]));
+  };
   return (
     <>
       <head>
@@ -98,21 +103,23 @@ const page = () => {
         <div className="row">
           <div className="col-md-3 border-right">
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-              {getImg ? (
+              {showFile ? (
                 <img
-                  className="rounded-circle mt-5 w-[150px] h-[150px]"
-                  // width="150px"
-                  // src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                  src={getImg}
+                  className="rounded-circle mt-5"
+                  width="150px"
+                  src={showFile}
                 />
               ) : (
-                <Image
-                  src={userImage}
-                  alt="user"
+                <img
                   className="rounded-circle mt-5"
+                  width="150px"
+                  src={
+                    getImg
+                      ? `/${getImg}`
+                      : "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                  }
                 />
               )}
-
               <span className="font-weight-bold">{getUsername}</span>
               <span className="text-black-50">{getEmail}</span>
               <span> </span>
@@ -186,7 +193,7 @@ const page = () => {
                       className="form-control"
                       placeholder="enter phone number"
                       {...register("profileImage")}
-                      onChange={(e) => setFile(e.target.files[0])}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
