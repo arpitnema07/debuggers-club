@@ -17,8 +17,8 @@ export default function HtmlEditor() {
     outputRef.current.contentWindow.eval(jsCode);
   };
   return (
-    <div className="container">
-      <div className="left flex p-3">
+    <div className="container flex flex-col">
+      <div className="left flex  p-3">
         <Card className="input-card h-full m-3">
           <h2>HTML</h2>
           <textarea
@@ -46,10 +46,17 @@ export default function HtmlEditor() {
             className="w-[200px] h-[250px] outline-none text-gray-400"
           />
         </Card>
-
-        <button onClick={run}>Run JS</button>
         <br />
       </div>
+      <div className="flex">
+        <button
+          onClick={run}
+          className="bg-green-600 text-white ml-auto my-1 mr-2 rounded-md p-2 text-sm"
+        >
+          Run JS
+        </button>
+      </div>
+
       <div className="right">
         <label>
           <i className="fa-solid fa-play"></i> Output

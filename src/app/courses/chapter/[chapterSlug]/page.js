@@ -36,7 +36,7 @@ const page = (props) => {
     <div>
       <Header />
       {/* Code for chapters */}
-      <div className="flex">
+      <div className="flex mb-10">
         <div className="p-2 w-1/2">
           <video
             controls={true}
@@ -57,9 +57,9 @@ const page = (props) => {
         </div>
         <Playground playgroundType={singleChapter?.playgroundType} />
       </div>
-      <span onClick={complete}>
+      <button onClick={complete} className="flex gap-2 border text-sm rounded-lg justify-center items-center">
         Mark as complete <TiTickOutline />
-      </span>
+      </button>
     </div>
   );
 };
