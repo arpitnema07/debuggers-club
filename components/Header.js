@@ -231,9 +231,15 @@ const Header = () => {
             )}
           </div>
         </div> */}
+<<<<<<< HEAD
+      </div>
+   </div> 
+   </>
+=======
         </div>
       </div>{" "}
     </>
+>>>>>>> c30c4bc10d0ad774d45f7ceeff2cfd927123541d
   );
 };
 
