@@ -114,7 +114,7 @@ const Header = () => {
                   </div>
                 </div>
                 <div>
-                  <Image
+                  <img
                     alt="aa"
                     unoptimized
                     src={user}
