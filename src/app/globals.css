@@ -65,3 +65,24 @@ body {
   cursor: pointer;
   border: solid 1px #BA68C8
 }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-info,
+.form-container {
+  width: 45%;
+}
+
+.contact-info p,
+.contact-info a {
+  margin-bottom: .5rem;
+}
+
+.form-container form input,
+.form-container form button {
+  display: block;
+  width: calc(100% - .5rem);
+}

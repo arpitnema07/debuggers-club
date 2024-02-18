@@ -6,46 +6,37 @@ connectDB();
 
 const courses = [
 	{
-		_id: "65cf479b680d5c9fca04b762",
-		name: " Backend Development Using Java",
-		shortDesc: ` Hello Coders.Embark on a Java journey with our comprehensive course, covering fundamental concepts and advanced techniques. Dive deep into object-oriented programming. Data structures, and algorithms. Master Spring Boot  framework for building robust, scalable applications. Gain hands-on experience through practical exercises and real-world  projects.Start  your java  and spring boot adventure today!...
+		_id: "65cf479b680d5c9fca04b760",
+		name: " Learn Algorithm with Visualization",
+		shortDesc: ` Embark on a journey through data structures and algorithms with our comprehensive course. Master sorting, and path finding algorithms. Implement Binary search tree and tries for efficient data storage and retrieval. Dive deep into problem-solving strategies and algorithmic thinking. Click On the chapter for using the playground.Start Mastering DSA today !  
 		`,
-		desc: `Session 1: Java OOPS Fundamentals $
-		1 . Understand the fundamentals of Java OOPS concepts like Object, Class, Inheritance, Polymorphism , Abstraction, and Encapsulation $
-		2 .Learn how to handle exceptions in Java,$
-		3 .Master the Singleton Design Pattern $
+		desc: `Sorting - The arrangement of data in a preferred order is called sorting in the data structure. By sorting data, it is easier to search through it quickly and easily. The simplest example of sorting is a dictionary. $
+		Types $
+		Quick sort. $
+		Bubble Sort.$
+		Merge sort. $
+		Insertion Sort.$
+		Selection Sort. $
 		
-		Session 2: Java 8 Functional Interfaces & Collections$
-		4 .Learn the differences between Abstract Classes and Interfaces with practical examples $ 
-		5 .Explore Functional Interfaces, Lambda Expressions$
-		6 .Use Generics and Streams to write efficient code $ 
-		7 .Work with Java Collections for efficient data management $ 
 		
-		Session 3: Multithreading & HashMap $ 
-		8 .Delve into the workings of HashMap $ 
-		9 .Understand the concepts of Multithreading, such as Thread creation, Thread Groups, and Thread Join $ 
-		10 .Learn to differentiate between Sequential and Parallel Streams for effective task execution $
-		
-		Session 4: Maven for Project Management $11 .Understand the need for Maven $12 .Learn to work with POM.xml, explore different Maven Repositories and their types $13 .Understand the Maven Lifecycle for efficient project management $
-		
-		Session 5: Spring Boot Basics $14 .Learn the basics of Server and Client model $15 .Introduction to Spring Boot $16 .How to run application as a Server $17 .Understand Embedded Servers like Jetty and Tomcat $18 .Manage Logging Levels in Spring Boot $19 .Work with Spring profiles and terminal commands $ 
-		
-		Session 6: REST API & Spring MVC $ 20 .Gain knowledge about REST API, HTTP Requests and Responses $ 21 .learn to work with POSTMAN and CURL for API testing $ 22 .Understand Annotations and Lombok $ 23 .Explore the Spring MVC framework $ 
-		
-		Session 7: Spring IOC & Dependency Injection $ 24 .Learn about the Spring IOC container, Dependency Injection, and Enums $ 25 .Understand the target of an Annotation $ 26 .Configure Beans using @Configuration and @Bean annotations $ 
-		
-		Session 8: Java Database Connectivity (JDBC) $ 27 .Understand the differences between In-Memory and Disk Storage $ 28 .Learn to connect a Spring Boot application with a Database Server $ 29 .Create Request Classes $ 30 .Perform validations using JDBC $ "`,
+		Path Finding Algorithm - Pathfinding algorithms are usually an attempt to solve the shortest and efficient path problems in graph theory. They try to find the best path given a starting point and ending point based on some predefined criteria. $
+ 		Types $ 
+		Dijkstra's Algorithm$
+		A* Search Algorithm$
+		Breadth First Search (BFS)
+		Depth First Search (DFS)$
+ 
+		Binary Search Tree - A binary search tree follows some order to arrange the elements like the value of the left node must be smaller than the parent node, and the value of the right node must be greater than the parent node. beginner $
 
-		difficulty: "Advance", //can be 'Easy', 'Moderate', 'Advanced'
+		Trie = A trie (derived from retrieval) is a multiway tree data structure used for storing strings over an alphabet. It is used to store a large amount of strings. The pattern matching can be done efficiently using tries.
+
+		
+		`,
+
+		difficulty: "Advanced", //can be 'Easy', 'Moderate', 'Advanced'
 		// image: '',                 //optional
 		tags: [
-			"Java OOPS Fundamentals",
-			"Functional Interfaces & Collections",
-			"MultiThreading",
-			"Maven for Project Management",
-			"REST API & Spring MVC",
-			"Spring Boot",
-			"Java Database Connectivity (JDBC)"
+			"Sorting ","Pathfinding Algorithm","Binary Search Tree" ,"trie"
 		 
 	  ], //keep any tag related to courses like what user can search 'css', 'js', etc.
 	},
@@ -53,52 +44,40 @@ const courses = [
 
 const chapters = [
 	{
-		name: "Java OOPS Fundamentals",
+		name: "Sorting algorithms",
 		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b762"),
-		video: "https://www.youtube.com/watch?v=bSrm9RXwBaI",
+		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
+		video: "https://www.youtube.com/watch?v=PkJIc5tBRUE",
 		article: "",
 		document: "",
-		playgroundType: "dsa", //Can be one of 'web', 'dsa', 'algo'
+		playgroundType: "sorting", //Can be one of 'web', 'dsa', 'algo'
 	},{
-		name: "Java 8 Functional Interfaces & Collections",
+		name: "PathFinding Algorithms",
 		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b762"),
-		video: "https://www.youtube.com/watch?v=rzA7UJ-hQn4",
+		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
+		video: "https://www.youtube.com/watch?v=tvAh0JZF2YE",
 		article: "",
 		document: "",
-		playgroundType: "dsa", //Can be one of 'web', 'dsa', 'algo'
+		playgroundType: "path", //Can be one of 'web', 'dsa', 'algo'
 	},	
 	{
-		name: " Multithreading ",
+		name: "Binary Search Tree",
 		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b762"),
-		video: "https://www.youtube.com/watch?v=4uQAokzfm-Q",
+		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
+		video: "https://www.youtube.com/watch?v=qAeitQWjNNg",
 		article: "",
 		document: "",
-		playgroundType: "dsa", //Can be one of 'web', 'dsa', 'algo'
-	}
-	,	
-	{
-		name: "HashMap",
-		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b762"),
-		video: "https://www.youtube.com/watch?v=WeF3_nk-UqY",
-		article: "",
-		document: "",
-		playgroundType: "dsa", //Can be one of 'web', 'dsa', 'algo'
+		playgroundType: "bst", //Can be one of 'web', 'dsa', 'algo'}
 	},	
 	{
-		name: "Maven for Project Management",
+		name: "Trie",
 		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b762"),
-		video: "https://www.youtube.com/watch?v=p0LPfK_oNCM",
+		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
+		video: "https://www.youtube.com/watch?v=m9zawMC6QAI",
 		article: "",
 		document: "",
-		playgroundType: "dsa", //Can be one of 'web', 'dsa', 'algo'
+		playgroundType: "trie", //Can be one of 'web', 'dsa', 'algo'
 	}
-
-
 ];
 
 const seedCourses = async () => {
