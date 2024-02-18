@@ -31,19 +31,19 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex items-center  justify-bewteen items-center bg-gray-100 p-4 shadow-md">
+      <div className="flex items-center  justify-bewteen bg-gray-100 p-4 shadow-md">
         <div
-          className="w-1/3 cursor-pointer font-serif text-blue-600 font-bold text-lg "
+          className="w-1/4 cursor-pointer font-serif text-blue-600 font-bold text-2xl "
           onClick={() => {
             router.push("/");
           }}
         >
           Debuggers Club
         </div>
-        <div className="flex w-2/3 items-center">
-          <div className="flex gap-3 justify-between mx-4">
+        <div className="flex w-3/4 items-center">
+          <div className="flex gap-3 justify-between mx-4 text-sm ">
             <div
-              className="cursor-pointer"
+              className="cursor-pointer hover:text-orange-600"
               onClick={() => {
                 router.push("/courses");
               }}
@@ -51,7 +51,7 @@ const Header = () => {
               Courses
             </div>
             <div
-              className="cursor-pointer"
+              className="cursor-pointer hover:text-orange-600"
               onClick={() => {
                 router.push("/blogs");
               }}
@@ -60,20 +60,29 @@ const Header = () => {
             </div>
 
             <div
-              className="cursor-pointer"
+              className="cursor-pointer hover:text-orange-600"
               onClick={() => {
                 router.push("/about-us");
               }}
             >
               About Us
             </div>
+           
             <div
-              className="cursor-pointer"
+              className="cursor-pointer hover:text-orange-600"
               onClick={() => {
                 router.push("/contact-us");
               }}
             >
               Contact Us
+            </div>
+            <div
+              className="cursor-pointer hover:text-orange-600"
+              onClick={() => {
+                router.push("/editor");
+              }}
+            >
+              Try Code Editor
             </div>
           </div>
 
@@ -97,16 +106,18 @@ const Header = () => {
               </>
             ) : (
               <div className="flex gap-2">
-                <div className="border-gray-400 border-[1px] flex items-center rounded-md  ">
-                  <input placeholder="search..." className="m-2"/>
-                  <IoSearchOutline className="bg-gray-300 m-0"/>
+                <div className="border-gray-400 border-[1px] flex items-center rounded-md bg-white m-2">
+                  <input placeholder="search..." className="m-2 outline-none	"/>
+                  <div className="m-0 p-0 h-full flex items-center justify-center bg-gray-300 w-10">
+                  <IoSearchOutline className=" m-0"/>
+                  </div>
                 </div>
                 <div>
                   <Image
                     alt="aa"
                     unoptimized
                     src={user}
-                    className="w-12 h-12 rounded-full cursor-pointer "
+                    className="w-12 h-12 rounded-full cursor-pointer mx-5 "
                     onClick={handleShow}
                   />
                   {show && (
