@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { toast } from "react-toastify";
 
 const schema = yup
   .object()
@@ -25,7 +26,7 @@ const page = () => {
   const [invalidPassword, setInvalidPassword] = useState([]);
   const [emailError, setEmailError] = useState([]);
   const [userNameErr, setUserNameErr] = useState([]);
-
+  const [loader, setLoader] = useState(false);
   const {
     register,
     handleSubmit,
@@ -34,10 +35,15 @@ const page = () => {
 
   const userRegister = async (value) => {
     try {
+      setLoader(true)
       const { data } = await axios.post(`/api/users/register`, value);
       console.log("data", data);
+      toast.success("Registration Successful");
       router.push("/login");
+      setLoader(false)
     } catch (error) {
+      setLoader(false)
+      console.log("error?.response :>> ", error?.response?.data?.message);
       if (
         error?.response?.data?.message ===
         "password and confirmPassword must match"
@@ -49,8 +55,9 @@ const page = () => {
       }
       if (error?.response?.data?.message === "Username already exist!") {
         setUserNameErr(error?.response?.data?.message);
+      } else {
+        toast.error(error?.response?.data?.message);
       }
-      console.log("error", error);
     }
   };
 
@@ -209,10 +216,10 @@ const page = () => {
                 <div className="text-center text-lg-start mt-4 pt-2">
                   <button
                     type="submit"
-                    className="btn btn-primary btn-lg"
-                    style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
+                    className="btn btn-primary btn-lg flex gap-3 items-center justify-center "
+                    style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem", display: "flex", justifyContent: "center", alignItems:"center", gap:"10px" }}
                   >
-                    Register
+                 {loader && <i class="fa fa-spinner fa-spin "></i> }  Register 
                   </button>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}
