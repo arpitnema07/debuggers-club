@@ -44,9 +44,15 @@ const page = (props) => {
         <h2 className="font-semibold text-center text-2xl">
           {singleBlog?.title}{" "}
         </h2>
+        {/* <img src={`${singleBlog?.userId?.profileImage}`} alt="uu" />
+         */}
         <div className="mx-28 flex justify-center my-6 gap-6 text-center">
           {singleBlog?.userId?.profileImage ? (
-            <img src={`${singleBlog?.userId?.profileImage}`} alt="uu" />
+            <img
+              src={`http://localhost:3000/${singleBlog?.userId?.profileImage}`}
+              className="w-12 h-12 rounded-full cursor-pointer "
+              alt=""
+            />
           ) : (
             <Image
               alt="aa"
@@ -65,7 +71,7 @@ const page = (props) => {
         </div>
         <div className="flex justify-center my-3">
           <img
-            src={`/${singleBlog?.blogImage}`}
+            src={`http://localhost:3000/${singleBlog?.blogImage}`}
             alt="img"
             className="w-5/6 flex justify-center text-center"
           />

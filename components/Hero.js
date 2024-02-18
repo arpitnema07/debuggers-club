@@ -59,21 +59,21 @@ const Hero = () => {
             <h2 className="text-center text-2xl font-semibold mb-6">
               Our Courses
             </h2>
-            <div className="grid grid-cols-3 justify-between gap-16 mx-12">
+            <div className="grid grid-cols-3 justify-between gap-16 mx-12 ">
               {/* card 1 */}
               {allCources?.map((data, i) => {
                 return (
-                  <div className=" border-2 ">
+                  <div className=" border-2 rounded-lg shadow-md">
                     <img
                       src={`/${data?.image}`}
                       alt="card"
-                      className="w-full"
+                      className="w-full rounded-lg"
                     />
-                    <h2 className="text-xl font-normal p-2">{data?.name}</h2>
-                    <p className="p-2">{data?.shortDesc}</p>
+                    <h2 className="text-xl font-normal px-4 py-2">{data?.name}</h2>
+                    <p className="p-4 text-sm">{data?.shortDesc}</p>
                     <Link
                       href={`/courses/${data?._id}`}
-                      className="text-green-500 p-2"
+                      className="text-green-500 p-4"
                     >
                       Read More
                     </Link>
