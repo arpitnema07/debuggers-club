@@ -10,23 +10,25 @@ import Cookies from "js-cookie";
 import Footer from "../../../components/Footer";
 import { toast } from "react-toastify";
 import { IoSearchOutline } from "react-icons/io5";
+import { useUserContext } from "../context/page";
 
 const page = () => {
+  const { search } = useUserContext();
   const accessToken = Cookies.get("accessToken");
   const router = useRouter();
   const [allCources, setAllCources] = useState([]);
-  const [searchKey, setSearchKey] = useState("");
+  // const [searchKey, setSearchKey] = useState("");
   useEffect(() => {
     if (accessToken) {
       getAllCources();
     }
-  }, [searchKey]);
+  }, [search]);
 
   const getAllCources = async () => {
     try {
       let apiUrl = "/api/courses";
-      if (searchKey) {
-        apiUrl += `?search=${searchKey}`
+      if (search) {
+        apiUrl += `?search=${search}`;
       }
       const { data } = await axios.get(apiUrl, {
         headers: {
@@ -40,7 +42,7 @@ const page = () => {
     <div>
       <Header />
       <div className="mb-10 mt-4">
-        <div className="flex">
+        {/*        <div className="flex">
           <div className="border-gray-400 border-[1px] flex items-center rounded-md bg-white m-2 ml-auto">
             <input
               type="search"
@@ -53,7 +55,7 @@ const page = () => {
               <IoSearchOutline className=" m-0" onClick={getAllCources} />
             </div>
           </div>
-        </div>
+        </div>*/}
         {/* cards  */}
         <div className="w-full my-10">
           <div className="p-4">
@@ -83,6 +85,8 @@ const page = () => {
                   </div>
                 );
               })}
+              {!allCources ||
+                (allCources?.length < 1 && <div>Course Not Found !!</div>)}
             </div>
           </div>
         </div>

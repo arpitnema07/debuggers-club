@@ -3,21 +3,15 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import Image from "next/image";
-import user from "../public/images/blank-profile-picture.webp";
+import User from "../public/images/blank-profile-picture.webp";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
+import { useUserContext } from "@/app/context/page";
 
 const Header = () => {
   const router = useRouter();
-  const [isToken, setIsToken] = useState();
-  useEffect(() => {
-    const token = Cookies.get("accessToken");
-    if (token) {
-      setIsToken(token);
-    }
-    console.log("token :>> ", token);
-  }, [isToken]);
+  const token = Cookies.get("accessToken");
+  const { setSearch, user } = useUserContext();
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -81,7 +75,7 @@ const Header = () => {
             </div>
           </div>
           <div className="ml-auto">
-            {!isToken ? (
+            {!token ? (
               <>
                 <div className="">
                   <Link
@@ -101,16 +95,20 @@ const Header = () => {
             ) : (
               <div className="flex gap-2">
                 <div className="border-gray-400 border-[1px] flex items-center rounded-md bg-white m-2">
-                  <input placeholder="search..." className="m-2 outline-none  " />
+                  <input
+                    placeholder="search..."
+                    className="m-2 outline-none"
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="search"
+                  />
                   <div className="m-0 p-0 h-full flex items-center justify-center bg-gray-300 w-10">
                     <IoSearchOutline className=" m-0" />
                   </div>
                 </div>
                 <div>
-                  <Image
+                  <img
                     alt="aa"
-                    unoptimized
-                    src={user}
+                    src={token ? `/${user?.profileImage}` : User}
                     className="w-12 h-12 rounded-full cursor-pointer mx-5 "
                     onClick={handleShow}
                   />
@@ -137,16 +135,9 @@ const Header = () => {
               </div>
             )}
           </div>
-        </div>
+        </div>{" "}
       </div>
     </>
   );
 };
 export default Header;
-
-
-
-
-
-
-

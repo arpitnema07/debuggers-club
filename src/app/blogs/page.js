@@ -14,22 +14,22 @@ import axios from "axios";
 import { IoSearchOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { useUserContext } from "../context/page";
 
 const page = () => {
-  const accessToken = Cookies.get("accessToken");
+  const { search } = useUserContext();
   const router = useRouter();
   const [allBlogs, setAllBlogs] = useState([]);
-  const [searchKey, setSearchKey] = useState("");
 
   useEffect(() => {
     getAllBlogs();
-  }, [searchKey]);
+  }, [search]);
 
   const getAllBlogs = async () => {
     try {
       let apiUrl = "/api/blogs";
-      if (searchKey) {
-        apiUrl += `?search=${searchKey}`;
+      if (search) {
+        apiUrl += `?search=${search}`;
       }
       const { data } = await axios.get(apiUrl, {
         // headers: {
@@ -46,7 +46,7 @@ const page = () => {
       <Header />
       {/* cards  */}
       <div className="w-full mb-10 mt-4">
-        <div className="flex">
+        {/*       <div className="flex">
           <div className="border-gray-400 border-[1px] flex items-center rounded-md bg-white m-2 ml-auto">
             <input placeholder="search blogs.." className="m-2 outline-none	" />
             <div
@@ -57,7 +57,7 @@ const page = () => {
               <IoSearchOutline className=" m-0" onClick={getAllBlogs} />
             </div>
           </div>
-        </div>
+        </div>*/}
         <div className="p-4">
           <div className="grid grid-cols-3 justify-between gap-16 mx-12">
             {/* card 1 */}
@@ -65,16 +65,27 @@ const page = () => {
               return (
                 <>
                   <div className=" border-2 rounded-lg shadow-md">
-                    <Image src={cardImage1} alt="card" className="w-full rounded-lg" />
-                    <h2 className="text-xl font-normal px-4 mt-2">{blog?.title}</h2>
+                    <Image
+                      src={cardImage1}
+                      alt="card"
+                      className="w-full rounded-lg"
+                    />
+                    <h2 className="text-xl font-normal px-4 mt-2">
+                      {blog?.title}
+                    </h2>
                     <p className="p-4 mt-2">{blog?.desc}</p>
-                    <Link href={`/blogs/{id}`} className="text-green-500  px-4 mb-2">
+                    <Link
+                      href={`/blogs/{id}`}
+                      className="text-green-500  px-4 mb-2"
+                    >
                       Read More
                     </Link>
                   </div>
                 </>
               );
             })}
+            {!allBlogs ||
+              (allBlogs?.length < 1 && <div>Blogs Not Found !!</div>)}
           </div>
         </div>
       </div>
