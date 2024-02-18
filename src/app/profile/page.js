@@ -6,8 +6,15 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CiHome } from "react-icons/ci";
 import { UserContext, useUserContext } from "../context/page";
+import userImage from "../../../public/images/blank-profile-picture.webp";
+import Image from "next/image";
+import Header from "../../../components/Header";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const page = () => {
+  const [loader, setLoader] = useState(false);
+  const router = useRouter();
   const { user } = useUserContext();
   console.log("user", user);
   const accessToken = Cookies.get("accessToken");
@@ -22,6 +29,7 @@ const page = () => {
 
   const editUserProfile = async (value) => {
     try {
+      setLoader(true);
       const formData = new FormData();
       formData.append("profileImage", file);
       formData.append("name", value?.name);
@@ -37,7 +45,16 @@ const page = () => {
       });
       getUserData();
       console.log("data", data);
+      setLoader(false);
+      router.push("/");
+      toast.success(data?.message || "Profile Updated Successfully!");
     } catch (error) {
+      setLoader(false);
+      if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
       console.log("error", error);
     }
   };
@@ -76,25 +93,26 @@ const page = () => {
           rel="stylesheet"
         />
       </head>
-
+      <Header />
       <div className="container rounded bg-white mt-5 mb-5">
-        <Link href="/">
-          <CiHome />
-        </Link>
-
         <div className="row">
           <div className="col-md-3 border-right">
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-              <img
-                className="rounded-circle mt-5"
-                width="150px"
-                // src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                src={
-                  getImg
-                    ? `/${getImg}`
-                    : "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                }
-              />
+              {getImg ? (
+                <img
+                  className="rounded-circle mt-5 w-[150px] h-[150px]"
+                  // width="150px"
+                  // src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                  src={getImg}
+                />
+              ) : (
+                <Image
+                  src={userImage}
+                  alt="user"
+                  className="rounded-circle mt-5"
+                />
+              )}
+
               <span className="font-weight-bold">{getUsername}</span>
               <span className="text-black-50">{getEmail}</span>
               <span> </span>
@@ -155,7 +173,7 @@ const page = () => {
                       onChange={(e) => setSelected(e.target.value)}
                       className="form-control"
                     >
-                      <option>Select you Qualification</option>
+                      <option disabled>Select you Qualification</option>
                       {qualification?.map((d) => {
                         return <option value={d}>{d}</option>;
                       })}
@@ -196,8 +214,17 @@ const page = () => {
                   <button
                     className="btn btn-primary profile-button"
                     type="submit"
+                    style={{
+                      paddingLeft: "2.5rem",
+                      paddingRight: "2.5rem",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
                   >
-                    Save Profile
+                    {loader && <i class="fa fa-spinner fa-spin "></i>} Save
+                    Profile
                   </button>
                 </div>
               </form>
