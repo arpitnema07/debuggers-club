@@ -23,8 +23,43 @@ export const createBlog = async (req, res) => {
 };
 
 export const getAllBlogs = async (req, res) => {
+	const search = req.query.search || "";
+	const page = parseInt(req.query.page) || 1;
+	const limit = parseInt(req.query.limit) || 10;
+
 	try {
-		const blogs = await blogModel.find({}).populate("userId");
+		const blogs = await blogModel.aggregate([
+			{
+				$match: {
+					title: { $regex: search, $options: "i" },
+				},
+			},
+			{
+				$lookup: {
+					from: "users",
+					localField: "userId",
+					foreignField: "_id",
+					pipeline: [
+						{
+							$project: {
+								name: true,
+								username: true,
+								profileImage: true,
+								created_at: true,
+								updated_at: true,
+							},
+						},
+					],
+					as: "user",
+				},
+			},
+			{
+				$unwind: {
+					path: "$user",
+					preserveNullAndEmptyArrays: true,
+				},
+			},
+		]);
 
 		return res.status(200).json({
 			message: "Blogs fetched successfully",
@@ -41,7 +76,7 @@ export const getAllBlogs = async (req, res) => {
 export const getSingleBlog = async (req, res) => {
 	try {
 		const { blogId } = req.params;
-		const blog = await blogModel.findById(blogId).populate("user");
+		const blog = await blogModel.findById(blogId).populate("userId");
 		if (!blog) {
 			return res.status(404).json({
 				message: "Blog not found",

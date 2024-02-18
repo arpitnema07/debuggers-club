@@ -57,8 +57,13 @@ const seedChapters = async () => {
 	await chapterModel.insertMany(chaptersToInsert);
 };
 
-await seedCourses();
-await seedChapters();
+// await seedCourses();
+// await seedChapters();
+
+await chapterModel.updateMany(
+	{ courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b763") },
+	{ $set: { playgroundType: "web" } }
+);
 
 console.log("Data seeded successfully");
 
