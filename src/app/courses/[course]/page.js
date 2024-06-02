@@ -32,7 +32,7 @@ const page = (props) => {
   const getSingleCourses = async () => {
     try {
       const { data } = await axios.get(
-        `/api/courses/${props?.params?.course}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/courses/${props?.params?.course}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

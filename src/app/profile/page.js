@@ -39,11 +39,15 @@ const page = () => {
       formData.append("country", value?.country);
       formData.append("state", value?.state);
       formData.append("qualification", selected);
-      const { data } = await axios.patch("/api/users/profile", formData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const { data } = await axios.patch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/profile`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       getUserData();
       console.log("data", data);
       setLoader(false);

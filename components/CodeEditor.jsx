@@ -53,10 +53,13 @@ export default function CodeEditor() {
     const code = editorRef.current.getValue();
     setOutput("");
     try {
-      const response = await axios.post(`/api/execute/${selectedLanguage}`, {
-        code,
-        input: input,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/execute/${selectedLanguage}`,
+        {
+          code,
+          input: input,
+        }
+      );
       if (response.data.output) setOutput(response.data.output);
       else setOutput(response.data.error);
     } catch (error) {

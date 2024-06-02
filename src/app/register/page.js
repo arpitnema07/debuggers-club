@@ -35,14 +35,17 @@ const page = () => {
 
   const userRegister = async (value) => {
     try {
-      setLoader(true)
-      const { data } = await axios.post(`/api/users/register`, value);
+      setLoader(true);
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/register`,
+        value
+      );
       console.log("data", data);
       toast.success("Registration Successful");
       router.push("/login");
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
-      setLoader(false)
+      setLoader(false);
       console.log("error?.response :>> ", error?.response?.data?.message);
       if (
         error?.response?.data?.message ===
@@ -217,9 +220,16 @@ const page = () => {
                   <button
                     type="submit"
                     className="btn btn-primary btn-lg flex gap-3 items-center justify-center "
-                    style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem", display: "flex", justifyContent: "center", alignItems:"center", gap:"10px" }}
+                    style={{
+                      paddingLeft: "2.5rem",
+                      paddingRight: "2.5rem",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
                   >
-                 {loader && <i class="fa fa-spinner fa-spin "></i> }  Register 
+                    {loader && <i class="fa fa-spinner fa-spin "></i>} Register
                   </button>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{" "}

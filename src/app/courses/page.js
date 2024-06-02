@@ -26,7 +26,7 @@ const page = () => {
 
   const getAllCources = async () => {
     try {
-      let apiUrl = "/api/courses";
+      let apiUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/courses`;
       if (search) {
         apiUrl += `?search=${search}`;
       }

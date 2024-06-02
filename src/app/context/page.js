@@ -36,11 +36,14 @@ export default function UserDataContext({ children }) {
 
   const getUserData = async () => {
     try {
-      const { data } = await axios.get("/api/users/me", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       setUser(data?.user);
     } catch (error) {}
   };

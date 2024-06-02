@@ -31,8 +31,8 @@ const Header = () => {
         >
           EDBuggers
         </div>
-        <div className="flex w-3/4 items-center">
-          <div className="flex gap-3 justify-between mx-4 text-sm ">
+        <div className="flex w-3/4 items-center font-bold">
+          <div className="flex gap-3  text-lg ">
             <div
               className="cursor-pointer hover:text-orange-600"
               onClick={() => {
@@ -41,7 +41,7 @@ const Header = () => {
             >
               Courses
             </div>
-            <div
+            {/* <div
               className="cursor-pointer hover:text-orange-600"
               onClick={() => {
                 router.push("/blogs");
@@ -64,7 +64,7 @@ const Header = () => {
               }}
             >
               Contact Us
-            </div>
+            </div> */}
             <div
               className="cursor-pointer hover:text-orange-600"
               onClick={() => {

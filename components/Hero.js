@@ -15,7 +15,7 @@ const Hero = () => {
 
   const getAllCources = async () => {
     try {
-      let url = "/api/courses";
+      let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/courses`;
       if (search) {
         url += `?search=${search}`;
       }
@@ -69,7 +69,9 @@ const Hero = () => {
                       alt="card"
                       className="w-full rounded-lg"
                     />
-                    <h2 className="text-xl font-normal px-4 py-2">{data?.name}</h2>
+                    <h2 className="text-xl font-normal px-4 py-2">
+                      {data?.name}
+                    </h2>
                     <p className="p-4 text-sm">{data?.shortDesc}</p>
                     <Link
                       href={`/courses/${data?._id}`}

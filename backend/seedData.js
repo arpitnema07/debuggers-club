@@ -2,15 +2,15 @@ import courseModel from "./models/course.model.js";
 import chapterModel from "./models/chapter.model.js";
 import connectDB from "./config/connectDB.js";
 import mongoose from "mongoose";
-connectDB();
+await connectDB();
 
 const courses = [
-	{
-		_id: "65cf479b680d5c9fca04b760",
-		name: " Learn Algorithm with Visualization",
-		shortDesc: ` Embark on a journey through data structures and algorithms with our comprehensive course. Master sorting, and path finding algorithms. Implement Binary search tree and tries for efficient data storage and retrieval. Dive deep into problem-solving strategies and algorithmic thinking. Click On the chapter for using the playground.Start Mastering DSA today !  
+  {
+    _id: "65cf479b680d5c9fca04b760",
+    name: " Learn Algorithm with Visualization",
+    shortDesc: ` Embark on a journey through data structures and algorithms with our comprehensive course. Master sorting, and path finding algorithms. Implement Binary search tree and tries for efficient data storage and retrieval. Dive deep into problem-solving strategies and algorithmic thinking. Click On the chapter for using the playground.Start Mastering DSA today !  
 		`,
-		desc: `Sorting - The arrangement of data in a preferred order is called sorting in the data structure. By sorting data, it is easier to search through it quickly and easily. The simplest example of sorting is a dictionary. $
+    desc: `Sorting - The arrangement of data in a preferred order is called sorting in the data structure. By sorting data, it is easier to search through it quickly and easily. The simplest example of sorting is a dictionary. $
 		Types $
 		Quick sort. $
 		Bubble Sort.$
@@ -33,89 +33,123 @@ const courses = [
 		
 		`,
 
-		difficulty: "Advanced", //can be 'Easy', 'Moderate', 'Advanced'
-		// image: '',                 //optional
-		tags: [
-			"Sorting ","Pathfinding Algorithm","Binary Search Tree" ,"trie"
-		 
-	  ], //keep any tag related to courses like what user can search 'css', 'js', etc.
-	},
+    difficulty: "Advanced", //can be 'Easy', 'Moderate', 'Advanced'
+    // image: '',                 //optional
+    tags: ["Sorting ", "Pathfinding Algorithm", "Binary Search Tree", "trie"], //keep any tag related to courses like what user can search 'css', 'js', etc.
+  },
 ];
 
 const chapters = [
-	{
-		name: "Sorting algorithms",
-		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
-		video: "https://www.youtube.com/watch?v=PkJIc5tBRUE",
-		article: "",
-		document: "",
-		playgroundType: "sorting", //Can be one of 'web', 'dsa', 'algo'
-	},{
-		name: "PathFinding Algorithms",
-		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
-		video: "https://www.youtube.com/watch?v=tvAh0JZF2YE",
-		article: "",
-		document: "",
-		playgroundType: "path", //Can be one of 'web', 'dsa', 'algo'
-	},	
-	{
-		name: "Binary Search Tree",
-		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
-		video: "https://www.youtube.com/watch?v=qAeitQWjNNg",
-		article: "",
-		document: "",
-		playgroundType: "bst", //Can be one of 'web', 'dsa', 'algo'}
-	},	
-	{
-		name: "Trie",
-		desc: "", //optional,
-		courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
-		video: "https://www.youtube.com/watch?v=m9zawMC6QAI",
-		article: "",
-		document: "",
-		playgroundType: "trie", //Can be one of 'web', 'dsa', 'algo'
-	}
+  {
+    name: "Sorting algorithms",
+    desc: "", //optional,
+    courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
+    video: "https://www.youtube.com/watch?v=PkJIc5tBRUE",
+    article: "",
+    document: "",
+    playgroundType: "sorting", //Can be one of 'web', 'dsa', 'algo'
+  },
+  {
+    name: "PathFinding Algorithms",
+    desc: "", //optional,
+    courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
+    video: "https://www.youtube.com/watch?v=tvAh0JZF2YE",
+    article: "",
+    document: "",
+    playgroundType: "path", //Can be one of 'web', 'dsa', 'algo'
+  },
+  {
+    name: "Binary Search Tree",
+    desc: "", //optional,
+    courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
+    video: "https://www.youtube.com/watch?v=qAeitQWjNNg",
+    article: "",
+    document: "",
+    playgroundType: "bst", //Can be one of 'web', 'dsa', 'algo'}
+  },
+  {
+    name: "Trie",
+    desc: "", //optional,
+    courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760"),
+    video: "https://www.youtube.com/watch?v=m9zawMC6QAI",
+    article: "",
+    document: "",
+    playgroundType: "trie", //Can be one of 'web', 'dsa', 'algo'
+  },
 ];
 
 const seedCourses = async () => {
-	const existingCourses = await courseModel.find({});
-	console.log("existingCourses", existingCourses);
-	const coursesToInsert = [];
-	for (const course of courses) {
-		for (const existingCourse of existingCourses) {
-			if (existingCourse._id.toString() === course._id) {
-				return;
-			}
-		}
-		coursesToInsert.push(course);
-	}
+  const existingCourses = await courseModel.find({});
+  console.log("existingCourses", existingCourses);
+  const coursesToInsert = [];
+  for (const course of courses) {
+    for (const existingCourse of existingCourses) {
+      if (existingCourse._id.toString() === course._id) {
+        return;
+      }
+    }
+    coursesToInsert.push(course);
+  }
 
-	await courseModel.insertMany(coursesToInsert);
+  await courseModel.insertMany(coursesToInsert);
 };
 
 const seedChapters = async () => {
-	const chaptersToInsert = [];
-	for (const chapter of chapters) {
-		const isCourseExists = await courseModel.findById(chapter.courseId);
-		if (!isCourseExists) {
-			throw new Error("Course does not exist");
-		}
+  const chaptersToInsert = [];
+  for (const chapter of chapters) {
+    const isCourseExists = await courseModel.findById(chapter.courseId);
+    if (!isCourseExists) {
+      throw new Error("Course does not exist");
+    }
 
-		chaptersToInsert.push(chapter);
-	}
-	await chapterModel.insertMany(chaptersToInsert);
+    chaptersToInsert.push(chapter);
+  }
+  await chapterModel.insertMany(chaptersToInsert);
 };
 
 // await seedCourses();
 // await seedChapters();
 
-await chapterModel.updateMany(
-	{ courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b763") },
-	{ $set: { playgroundType: "web" } }
-);
+// await chapterModel.updateMany(
+// 	{ courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b763") },
+// 	{ $set: { playgroundType: "web" } }
+// );
+// await courseModel.updateMany(
+//   { _id: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b760") },
+//   { $set: { image: "images/5.jpg" } }
+// );
+
+const cours = [
+  {
+    _id: "65cf479b680d5c9fca04b962",
+    name: "Complete Python for Beginners",
+    shortDesc: `Learn Python from Basic to Advance`,
+    desc: `Learn Python from Basic to Advance
+    Data Types 
+		Variable 
+    Functions
+    and more...
+		`,
+
+    difficulty: "Easy", //can be 'Easy', 'Moderate', 'Advanced'
+    image: "images/4.jpg", //optional
+    tags: ["Programming ", "Python", "DSA", "Data Science"], //keep any tag related to courses like what user can search 'css', 'js', etc.
+  },
+];
+const chapt = [
+  {
+    name: "Python in One Shot",
+    desc: "If you're looking to start learning Python, then this video is for you! I'll teach you the basics of Python in a easy-to-follow, step-by-step format. By the end of this video, you'll have everything you need to get started with Python programming.", //optional,
+    courseId: new mongoose.Types.ObjectId("65cf479b680d5c9fca04b962"),
+    video: "https://www.youtube.com/watch?v=XnSasPR2KJI",
+    article: "",
+    document: "",
+    playgroundType: "dsa", //Can be one of 'web', 'dsa', 'algo'
+  },
+];
+
+await courseModel.insertMany(cours);
+await chapterModel.insertMany(chapt);
 
 console.log("Data seeded successfully");
 
