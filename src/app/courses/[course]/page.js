@@ -52,7 +52,7 @@ const page = (props) => {
         <div className="flex gap-2 my-3">
           <div className="ml-auto">
             {/* <button className="text-white bg-blue-700  rounded-md py-2 px-4 ">Enroll Now</button> */}
-            <Link href={"/call/mentor"}>
+            <Link href={`${process.env.NEXT_PUBLIC_SERVER_URL}/call/mentor`}>
               <button className="text-white bg-blue-700 ml-auto rounded-md py-2 px-4 mr-4">
                 Call A Mentor
               </button>
